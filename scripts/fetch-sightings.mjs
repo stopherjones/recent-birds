@@ -22,6 +22,10 @@ const er = await fetch(ebirdUrl, { headers: { 'X-eBirdApiToken': EBIRD_API_KEY }
 if (!er.ok) throw new Error(`eBird returned ${er.status}: ${(await er.text()).slice(0, 200)} (key length ${EBIRD_API_KEY.length})`);
 const observations = await er.json();
 if (!Array.isArray(observations)) throw new Error('Unexpected eBird response');
+// Short hotspot name: keep only the part before the first comma
+for (const o of observations) {
+  if (o.locName) o.locName = o.locName.split(',')[0].trim();
+}
 console.log(`eBird: ${observations.length} records`);
 
 // ---- photo licence check (same rules as the page)

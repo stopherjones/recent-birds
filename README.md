@@ -6,7 +6,7 @@ A static page showing bird species recently reported by eBird within 12 km of a 
 
 ## How it works
 
-- A GitHub Action runs daily at 05:00 UTC (`.github/workflows/daily.yml`).
+- A GitHub Action runs daily at 23:00 UTC (`.github/workflows/daily.yml`).
 - It calls the eBird API for observations from the last 7 days within 12 km of the configured point (`scripts/fetch-sightings.mjs`).
 - It finds one reusable photo per species, using the Wikipedia main photo first and a Wikimedia Commons search as fallback. Only freely licensed images (CC BY, CC BY-SA, CC0, public domain) without no-derivatives or non-commercial terms are used.
 - It writes `data/sightings.json` and `data/species-photos.json` and commits them to `main`. GitHub Pages redeploys from `main`.
