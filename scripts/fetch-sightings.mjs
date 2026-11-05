@@ -26,6 +26,44 @@ if (!Array.isArray(observations)) throw new Error('Unexpected eBird response');
 for (const o of observations) {
   if (o.locName) o.locName = o.locName.split(',')[0].trim();
 }
+
+// ---- history: persists across runs so absences longer than the eBird window can be measured
+const HISTORY_FILE = 'data/history.json';
+const DAY = 24 * 60 * 60 * 1000;
+const toMs = s => Date.parse(String(s).replace(' ', 'T'));
+let history = {};
+try { history = JSON.parse(await readFile(HISTORY_FILE, 'utf8')); } catch {}
+
+// Latest sighting per species in this window (overwrites older records)
+const latestBySpecies = new Map();
+for (const o of observations) {
+  if (!o.speciesCode) continue;
+  const cur = latestBySpecies.get(o.speciesCode);
+  if (!cur || toMs(o.obsDt) > toMs(cur.obsDt)) latestBySpecies.set(o.speciesCode, o);
+}
+
+// Update history. A sighting more than DAYS_BACK after the last one means the bird
+// was missing from the feed in between, so that gap is recorded as an absence.
+for (const [code, o] of latestBySpecies) {
+  const h = history[code];
+  if (!h) {
+    history[code] = { firstSeen: o.obsDt, lastSeen: o.obsDt, absenceDays: null };
+    continue;
+  }
+  if (toMs(o.obsDt) > toMs(h.lastSeen)) {
+    const gap = (toMs(o.obsDt) - toMs(h.lastSeen)) / DAY;
+    if (gap > DAYS_BACK) h.absenceDays = Math.round(gap);
+    h.lastSeen = o.obsDt;
+  }
+}
+
+// Output: one entry per species in this window, with its history fields
+const latest = [...latestBySpecies.values()].map(o => ({
+  ...o,
+  firstSeen: history[o.speciesCode].firstSeen,
+  absenceDays: history[o.speciesCode].absenceDays
+}));
+console.log(`species: ${latest.length}`);
 console.log(`eBird: ${observations.length} records`);
 
 // ---- photo licence check (same rules as the page)
@@ -102,7 +140,7 @@ async function findPhoto(sciName, comName) {
 let photos = {};
 try { photos = JSON.parse(await readFile('data/species-photos.json', 'utf8')); } catch {}
 const species = new Map();
-for (const o of observations) if (o.speciesCode) species.set(o.speciesCode, o);
+for (const o of latest) species.set(o.speciesCode, o);
 const next = {};
 for (const [code, o] of species) {
   if (photos[code]) { next[code] = photos[code]; continue; }
@@ -113,10 +151,11 @@ console.log(`photos: ${Object.values(next).filter(Boolean).length} of ${species.
 
 // ---- write (no coordinates are published)
 await mkdir('data', { recursive: true });
+await writeFile(HISTORY_FILE, JSON.stringify(history, null, 2) + '\n');
 await writeFile('data/sightings.json', JSON.stringify({
   generatedAt: new Date().toISOString(),
   radiusKm: DIST_KM,
   daysBack: DAYS_BACK,
-  observations
+  observations: latest
 }, null, 2) + '\n');
 await writeFile('data/species-photos.json', JSON.stringify(next, null, 2) + '\n');
