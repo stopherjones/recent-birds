@@ -46,15 +46,30 @@
 <main class="sheet" id="sheet" aria-live="polite"></main>
 <section class="caption" id="caption"><div class="hint" id="hint">Loading sightings…</div></section>
 
-<footer id="foot">Only species with a drawing in <code>../images/</code> are shown.</footer>
+<footer id="foot">Only species with a drawing in <code>images/</code> are shown.</footer>
 
 <script>
-// Paths are relative to this page (mockup/ sits one level below the project root). Serve the project (e.g. GitHub Pages or a local server);
+// Paths are relative to this page, which sits at the project root. Serve the project (e.g. GitHub Pages or a local server);
 // browsers block fetch() for files opened straight from disk.
-const DATA_URL = '../data/sightings.json';
-const IMG_DIR  = '../images/';
+const DATA_URL = 'data/sightings.json';
+const IMG_DIR  = 'images/';
 const COLS = 4;          // drawings per row
 const ROW_H = 170;       // px between rows
+
+// Show at most SHOW species.
+// Order: new species first (first recorded in the last two days), then the longest
+// absence before the latest return (absenceDays), then the latest sighting.
+const SHOW = 24;
+const NEW_WINDOW_MS = 2 * 24 * 60 * 60 * 1000;
+const ts = s => Date.parse(String(s || '').replace(' ', 'T'));
+function isNew(o) { return !!o.firstSeen && (Date.now() - ts(o.firstSeen)) < NEW_WINDOW_MS; }
+function byPriority(a, b) {
+  const n = Number(isNew(b)) - Number(isNew(a));
+  if (n !== 0) return n;
+  const ga = a.absenceDays ?? -1, gb = b.absenceDays ?? -1;   // no recorded absence sorts last
+  if (ga !== gb) return gb - ga;
+  return String(b.obsDt).localeCompare(String(a.obsDt));
+}
 
 const sheet = document.getElementById('sheet');
 const caption = document.getElementById('caption');
@@ -80,7 +95,7 @@ async function load() {
     const data = await res.json();
 
     // Latest sighting per species
-    const obs = (data.observations || []).slice().sort((a, b) => String(b.obsDt).localeCompare(String(a.obsDt)));
+    const obs = (data.observations || []).slice().sort(byPriority);
     const seen = new Set();
     const unique = [];
     for (const o of obs) {
@@ -91,7 +106,7 @@ async function load() {
 
     // Keep only species that have a drawing
     const checks = await Promise.all(unique.map(async o => (await drawingExists(o.speciesCode)) ? o : null));
-    const items = checks.filter(Boolean);
+    const items = checks.filter(Boolean).slice(0, SHOW);
     layout(items);
 
     hint.textContent = items.length
@@ -149,7 +164,7 @@ function show(o, btn) {
   caption.querySelector('.name').textContent = o.comName || '';
   caption.querySelector('.sci').textContent = o.sciName || '';
   caption.querySelector('.meta b').textContent = (o.locName || '').split(',')[0].trim();
-  caption.querySelector('.meta span').textContent = when;
+  caption.querySelector('.meta span').textContent = when + (isNew(o) ? ' · new' : '');
 }
 
 load();

@@ -1,173 +1,21 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Recent Birds — illustrated sightings</title>
-<style>
-  :root { --paper:#e9e4d6; --ink:#3b3a33; --muted:#7d7a6c; --line:#c9c3b0; }
-  * { box-sizing:border-box; }
-  body { margin:0; background:var(--paper); color:var(--ink); font-family:Georgia,"Times New Roman",serif; }
-  header { text-align:center; padding:36px 16px 4px; }
-  .kicker { font:500 12px/1 system-ui,sans-serif; letter-spacing:.24em; text-transform:uppercase; color:var(--muted); }
-  h1 { font-weight:400; font-size:clamp(34px,6vw,56px); margin:12px 0 6px; }
-  .sub { font:13px/1.4 system-ui,sans-serif; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
-
-  /* Height grows with the number of drawings; positions are set by the script */
-  .sheet { position:relative; width:min(960px,94vw); margin:18px auto 0; min-height:200px; }
-  .sheet button {
-    position:absolute; background:none; border:0; padding:0; cursor:pointer;
-    transform:translateX(var(--cx,0)) rotate(var(--r)) scaleX(var(--flip));
-  }
-  .sheet img {
-    display:block; width:100%; height:auto; mix-blend-mode:multiply;
-    filter:drop-shadow(0 4px 5px rgba(60,50,30,.12));
-  }
-  .sheet button[aria-pressed="true"] img, .sheet button:focus-visible img {
-    filter:drop-shadow(0 0 4px rgba(60,50,30,.5)) drop-shadow(0 4px 5px rgba(60,50,30,.12));
-  }
-
-  .caption { width:min(960px,94vw); margin:8px auto 0; min-height:72px; text-align:center; padding:12px 8px; border-top:1px solid var(--line); }
-  .caption .name { font-size:20px; }
-  .caption .sci { font-style:italic; color:var(--muted); font-size:14px; }
-  .caption .meta { font:12px/1.5 system-ui,sans-serif; color:var(--muted); margin-top:4px; }
-  .caption .meta b { font-weight:500; color:var(--ink); }
-  .caption .hint { font:12px/1.5 system-ui,sans-serif; color:var(--muted); }
-  footer { text-align:center; font:12px/1.5 system-ui,sans-serif; color:var(--muted); padding:20px 16px 40px; }
-</style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#e9e5d9"><title>Birds Around Me — Heard Today</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-<header>
-  <div class="kicker">Local birds</div>
-  <h1>Nearby sightings</h1>
-  <div class="sub">Your local patch · 12 km · 7 days</div>
-</header>
-
-<main class="sheet" id="sheet" aria-live="polite"></main>
-<section class="caption" id="caption"><div class="hint" id="hint">Loading sightings…</div></section>
-
-<footer id="foot">Only species with a drawing in <code>../images/</code> are shown.</footer>
-
-<script>
-// Paths are relative to this page (mockup/ sits one level below the project root). Serve the project (e.g. GitHub Pages or a local server);
-// browsers block fetch() for files opened straight from disk.
-const DATA_URL = '../data/sightings.json';
-const IMG_DIR  = '../images/';
-const COLS = 4;          // drawings per row
-const ROW_H = 170;       // px between rows
-
-// Show at most SHOW species.
-// Order: new species first (first recorded in the last two days), then the longest
-// absence before the latest return (absenceDays), then the latest sighting.
-const SHOW = 24;
-const NEW_WINDOW_MS = 2 * 24 * 60 * 60 * 1000;
-const ts = s => Date.parse(String(s || '').replace(' ', 'T'));
-function isNew(o) { return !!o.firstSeen && (Date.now() - ts(o.firstSeen)) < NEW_WINDOW_MS; }
-function byPriority(a, b) {
-  const n = Number(isNew(b)) - Number(isNew(a));
-  if (n !== 0) return n;
-  const ga = a.absenceDays ?? -1, gb = b.absenceDays ?? -1;   // no recorded absence sorts last
-  if (ga !== gb) return gb - ga;
-  return String(b.obsDt).localeCompare(String(a.obsDt));
-}
-
-const sheet = document.getElementById('sheet');
-const caption = document.getElementById('caption');
-const hint = document.getElementById('hint');
-let active = null;
-
-// Stable pseudo-random number per species, so the layout doesn't reshuffle on reload
-function hash(s) { let h = 0; for (const c of s) h = (h * 31 + c.charCodeAt(0)) >>> 0; return h; }
-
-function drawingExists(code) {
-  return new Promise(resolve => {
-    const im = new Image();
-    im.onload = () => resolve(true);
-    im.onerror = () => resolve(false);
-    im.src = IMG_DIR + code + '.png';
-  });
-}
-
-async function load() {
-  try {
-    const res = await fetch(DATA_URL, { cache: 'no-cache' });
-    if (!res.ok) throw new Error('sightings returned ' + res.status);
-    const data = await res.json();
-
-    // Latest sighting per species
-    const obs = (data.observations || []).slice().sort(byPriority);
-    const seen = new Set();
-    const unique = [];
-    for (const o of obs) {
-      if (!o.speciesCode || seen.has(o.speciesCode)) continue;
-      seen.add(o.speciesCode);
-      unique.push(o);
-    }
-
-    // Keep only species that have a drawing
-    const checks = await Promise.all(unique.map(async o => (await drawingExists(o.speciesCode)) ? o : null));
-    const items = checks.filter(Boolean).slice(0, SHOW);
-    layout(items);
-
-    hint.textContent = items.length
-      ? 'Tap a bird to see its name and where it was seen'
-      : 'No drawings yet for these sightings';
-  } catch (e) {
-    hint.textContent = 'Could not load sightings: ' + e.message;
-  }
-}
-
-function layout(items) {
-  sheet.innerHTML = '';
-  const rows = Math.max(1, Math.ceil(items.length / COLS));
-  sheet.style.height = (rows * ROW_H + 40) + 'px';
-
-  items.forEach((o, i) => {
-    const h = hash(o.speciesCode);
-    const row = Math.floor(i / COLS);
-    const inRow = Math.min(COLS, items.length - row * COLS);   // items in this row
-    const k = i % COLS;                                        // position within the row
-    const slot = 100 / inRow;
-    const cx = (k + 0.5) * slot;                               // centre of this slot, %
-    const jx = (h % 31) - 15;                    // px jitter
-    const jy = ((h >> 5) % 41) - 20;             // px jitter
-    const w = 20 + ((h >> 10) % 11);             // width as % of the sheet, 20–30
-    const r = ((h >> 14) % 17) - 8;              // tilt in degrees
-    const flip = (h >> 18) % 2 ? -1 : 1;
-
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.setAttribute('aria-label', o.comName || o.speciesCode);
-    btn.setAttribute('aria-pressed', 'false');
-    btn.style.cssText =
-      `left:${cx}%;` +
-      `top:${row * ROW_H + jy + 20}px;` +
-      `width:${w}%;` +
-      `--r:${r}deg;--flip:${flip};--cx:-50%;z-index:${i};`;
-
-    const img = document.createElement('img');
-    img.src = IMG_DIR + o.speciesCode + '.png';
-    img.alt = '';
-    btn.append(img);
-    btn.onclick = () => show(o, btn);
-    sheet.append(btn);
-  });
-}
-
-function show(o, btn) {
-  if (active) active.setAttribute('aria-pressed', 'false');
-  active = btn;
-  btn.setAttribute('aria-pressed', 'true');
-  const when = o.obsDt ? new Date(o.obsDt.replace(' ', 'T')).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
-  caption.innerHTML =
-    `<div class="name"></div><div class="sci"></div><div class="meta"><b></b> · <span></span></div>`;
-  caption.querySelector('.name').textContent = o.comName || '';
-  caption.querySelector('.sci').textContent = o.sciName || '';
-  caption.querySelector('.meta b').textContent = (o.locName || '').split(',')[0].trim();
-  caption.querySelector('.meta span').textContent = when + (isNew(o) ? ' · new' : '');
-}
-
-load();
-</script>
+<body><main class="shell">
+<div class="toolbar"><div class="controls"><button id="locate" class="primary">Find birds near me</button></div></div>
+<section class="poster" aria-label="Bird sightings poster">
+<header class="mast"><div class="eyebrow">Local birds</div><h1>Nearby sightings</h1><div class="sub" id="place">Sightings within 10km over the last 7 days</div></header>
+<div class="rule"></div><div class="summary" id="summary">A small record of the birds recently reported nearby</div>
+<section class="birds" id="birds"><div class="empty">Your local bird list will appear here.<br>Choose <b>Find birds near me</b> and allow location access.</div></section>
+<footer class="footer"><span id="count">Awaiting observations</span><span id="updated">eBird · Recent nearby observations</span></footer>
+</section>
+<div class="status" id="status" role="status" aria-live="polite"></div>
+<input id="worker" type="hidden" value="https://ebird-api.chrisjones59.workers.dev">
+</main>
+<script src="js/app.js"></script>
 </body>
 </html>
