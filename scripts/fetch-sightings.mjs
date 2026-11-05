@@ -1,7 +1,7 @@
 // Daily job: pulls recent eBird observations around a fixed point and
 // resolves one reusable photo per species (Wikipedia main photo first,
 // then a Wikimedia Commons search). Writes data/*.json for the page.
-import { readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 
 const EBIRD_API_KEY = (process.env.EBIRD_API_KEY || '').trim();
 const EBIRD_LAT = (process.env.EBIRD_LAT || '').trim();
@@ -108,6 +108,7 @@ for (const [code, o] of species) {
 console.log(`photos: ${Object.values(next).filter(Boolean).length} of ${species.size} species`);
 
 // ---- write (no coordinates are published)
+await mkdir('data', { recursive: true });
 await writeFile('data/sightings.json', JSON.stringify({
   generatedAt: new Date().toISOString(),
   radiusKm: DIST_KM,
