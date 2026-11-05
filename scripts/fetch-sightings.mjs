@@ -3,7 +3,9 @@
 // then a Wikimedia Commons search). Writes data/*.json for the page.
 import { readFile, writeFile } from 'node:fs/promises';
 
-const { EBIRD_API_KEY, EBIRD_LAT, EBIRD_LNG } = process.env;
+const EBIRD_API_KEY = (process.env.EBIRD_API_KEY || '').trim();
+const EBIRD_LAT = (process.env.EBIRD_LAT || '').trim();
+const EBIRD_LNG = (process.env.EBIRD_LNG || '').trim();
 if (!EBIRD_API_KEY || !EBIRD_LAT || !EBIRD_LNG) {
   throw new Error('Missing EBIRD_API_KEY, EBIRD_LAT or EBIRD_LNG');
 }
@@ -17,7 +19,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 // ---- eBird
 const ebirdUrl = `https://api.ebird.org/v2/data/obs/geo/recent?lat=${EBIRD_LAT}&lng=${EBIRD_LNG}&dist=${DIST_KM}&back=${DAYS_BACK}`;
 const er = await fetch(ebirdUrl, { headers: { 'X-eBirdApiToken': EBIRD_API_KEY } });
-if (!er.ok) throw new Error(`eBird returned ${er.status}`);
+if (!er.ok) throw new Error(`eBird returned ${er.status}: ${(await er.text()).slice(0, 200)} (key length ${EBIRD_API_KEY.length})`);
 const observations = await er.json();
 if (!Array.isArray(observations)) throw new Error('Unexpected eBird response');
 console.log(`eBird: ${observations.length} records`);
