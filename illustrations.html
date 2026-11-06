@@ -124,8 +124,9 @@ function rng(seed) {
   return () => { x = (x * 1664525 + 1013904223) >>> 0; return x / 4294967296; };
 }
 
-// Poster layout: birds of varied sizes, scattered with no overlap.
-// Each bird tries many spots; if none is free, it shrinks slightly and tries again.
+// Hex layout: birds sit on a hexagonal grid (alternate rows offset by half a cell),
+// so they nest like tiles. Each bird is varied in size, tilt and position a little
+// so the sheet still looks hand-placed.
 function layout() {
   sheet.innerHTML = '';
   const n = items.length;
@@ -133,41 +134,39 @@ function layout() {
   const W = sheet.clientWidth, H = sheet.clientHeight;
   if (!W || !H) return;
 
-  const margin = 6;
-  const base = Math.sqrt((W * H) / n) * 0.95;      // typical width for an even spread
-  const placed = [];                               // boxes already used: {x, y, w, h}
-  const hits = (x, y, w, h) => placed.some(p =>
-    x < p.x + p.w && x + w > p.x && y < p.y + p.h && y + h > p.y);
+  const ROW = Math.sqrt(3) / 2;                    // vertical spacing of a hex grid, in cell widths
+  // Pick the row count that makes the grid cell (d) largest for this window
+  let best = { d: 0, rows: 1, cols: n };
+  for (let rows = 1; rows <= n; rows++) {
+    const cols = Math.ceil(n / rows);
+    const d = Math.min(W / (cols + 0.5), H / ((rows - 1) * ROW + 1));
+    if (d > best.d) best = { d, rows, cols };
+  }
+  const { d, rows, cols } = best;
+  const gridW = (cols + 0.5) * d, gridH = ((rows - 1) * ROW + 1) * d;
+  const x0 = (W - gridW) / 2, y0 = (H - gridH) / 2;
 
   items.forEach((o, i) => {
     const h = hash(o.speciesCode);
     const rand = rng(h);
-    // Size: earlier (newer / longer-absent) birds a little larger, plus natural variation
-    let w = Math.min(base * (i < 3 ? 1.2 : 1) * (0.78 + rand() * 0.45), W * 0.42);
+    const row = Math.floor(i / cols);
+    const k = i % cols;
+    const rowCount = Math.min(cols, n - row * cols);
+    const shift = (row % 2) * d / 2;               // offset alternate rows
+    const centreRow = (cols - rowCount) * d / 2;   // centre a short last row
+    // Size varies around the cell; the first few (newest / longest absent) a little larger
+    const w = d * (i < 3 ? 1.02 : 0.9) * (0.9 + rand() * 0.15);
+    const cx = x0 + (k + 0.5) * d + shift + centreRow + (rand() - 0.5) * d * 0.16;
+    const cy = y0 + d / 2 + row * ROW * d + (rand() - 0.5) * d * 0.16;
     const r = (rand() * 14) - 7;                   // tilt, degrees
     const flip = rand() < 0.5 ? -1 : 1;
-
-    let spot = null;
-    for (let shrink = 0; shrink < 12 && !spot; shrink++) {
-      const boxH = w * 1.35;                       // drawing height, generous estimate so birds never touch
-      const maxX = W - w - margin, maxY = H - boxH - margin;
-      if (maxX <= margin || maxY <= margin) { w *= 0.92; continue; }
-      for (let t = 0; t < 300 && !spot; t++) {
-        const x = margin + rand() * (maxX - margin);
-        const y = margin + rand() * (maxY - margin);
-        if (!hits(x, y, w, boxH)) spot = { x, y, h: boxH };
-      }
-      if (!spot) w *= 0.92;                        // no room at this size: shrink and retry
-    }
-    if (!spot) return;                             // sheet is full; leave the rest off
-    placed.push({ x: spot.x, y: spot.y, w, h: spot.h });
 
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.setAttribute('aria-label', o.comName || o.speciesCode);
     btn.setAttribute('aria-pressed', 'false');
-    btn.style.left = spot.x + 'px';
-    btn.style.top = spot.y + 'px';
+    btn.style.left = (cx - w / 2) + 'px';
+    btn.style.top = (cy - w * 0.6) + 'px';         // drawings are about 1.2 times as tall as wide
     btn.style.width = w + 'px';
     btn.style.setProperty('--r', r + 'deg');
     btn.style.setProperty('--flip', flip);
