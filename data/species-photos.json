@@ -17,11 +17,11 @@
     "author": "This picture was realized by Richard Bartz by using a Canon EF 70-300mm f/4-5.6 IS USM Lens",
     "license": "CC BY-SA 2.5"
   },
-  "stodov1": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/Pigeon_colombin_%28Colulmba_oenas%29%2C_Parc_de_Woluwe%2C_Bruxelles_%2851921513878%29.jpg/960px-Pigeon_colombin_%28Colulmba_oenas%29%2C_Parc_de_Woluwe%2C_Bruxelles_%2851921513878%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Pigeon_colombin_(Colulmba_oenas),_Parc_de_Woluwe,_Bruxelles_(51921513878).jpg",
-    "author": "Frank Vassen from Brussels, Belgium",
-    "license": "CC BY 2.0"
+  "rinphe1": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Phasianus_colchicus_Oulu_20200524_02.jpg/960px-Phasianus_colchicus_Oulu_20200524_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Phasianus_colchicus_Oulu_20200524_02.jpg",
+    "author": "Estormiz",
+    "license": "CC0"
   },
   "cowpig1": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Columba_palumbus_EM1B1397_%2827445478998%29.jpg/960px-Columba_palumbus_EM1B1397_%2827445478998%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
@@ -29,17 +29,47 @@
     "author": "Bengt Nyman from Vaxholm, Sweden",
     "license": "CC BY 2.0"
   },
+  "commoo3": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/Common_moorhen_%28Gallinula_chloropus%29_France.jpg/960px-Common_moorhen_%28Gallinula_chloropus%29_France.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Common_moorhen_(Gallinula_chloropus)_France.jpg",
+    "author": "Alexis Lours",
+    "license": "CC BY 4.0"
+  },
+  "eurwoo": {
+    "image": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Woodcock_earthworm.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+    "source": "https://commons.wikimedia.org/wiki/File:Woodcock_earthworm.jpg",
+    "author": "Ronald Slabke",
+    "license": "CC BY-SA 3.0"
+  },
+  "webowl1": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/17/Barn_Owl%2C_Lancashire.jpg/960px-Barn_Owl%2C_Lancashire.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Barn_Owl,_Lancashire.jpg",
+    "author": "Steven Ward",
+    "license": "CC BY 2.0"
+  },
+  "fieldf": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Turdus_pilaris_EM1B9020_%2834450664312%29.jpg/960px-Turdus_pilaris_EM1B9020_%2834450664312%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Turdus_pilaris_EM1B9020_(34450664312).jpg",
+    "author": "Bengt Nyman from Vaxholm, Sweden",
+    "license": "CC BY 2.0"
+  },
+  "grywag": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Gebirgsstelze_im_Geo-Naturpark_Bergstra%C3%9Fe-Odenwald.jpg/960px-Gebirgsstelze_im_Geo-Naturpark_Bergstra%C3%9Fe-Odenwald.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Gebirgsstelze_im_Geo-Naturpark_Bergstra%C3%9Fe-Odenwald.jpg",
+    "author": "Herwig Winter",
+    "license": "CC BY-SA 4.0"
+  },
   "eucdov": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/2022-04-06_Streptopelia_decaocto%2C_Plovdiv%2C_Bulgaria_1.jpg/960px-2022-04-06_Streptopelia_decaocto%2C_Plovdiv%2C_Bulgaria_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "source": "https://commons.wikimedia.org/wiki/File:2022-04-06_Streptopelia_decaocto,_Plovdiv,_Bulgaria_1.jpg",
     "author": "stevem4560",
     "license": "CC BY 4.0"
   },
-  "mewgul": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Larus_canus_Common_Gull_in_Norway.jpg/960px-Larus_canus_Common_Gull_in_Norway.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Larus_canus_Common_Gull_in_Norway.jpg",
-    "author": "Andreas Trepte",
-    "license": "CC BY-SA 2.5"
+  "comkin1": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Alcedo_atthis_-England-8_%28cropped%29.jpg/960px-Alcedo_atthis_-England-8_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Alcedo_atthis_-England-8_(cropped).jpg",
+    "author": "Tony Wood",
+    "license": "CC BY 2.0"
   },
   "grswoo": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/Great_spotted_woodpecker_%28Dendrocopos_major%29_male_Drenthe.jpg/960px-Great_spotted_woodpecker_%28Dendrocopos_major%29_male_Drenthe.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
@@ -95,12 +125,6 @@
     "author": "Alexis Lours",
     "license": "CC BY 4.0"
   },
-  "sonthr1": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/%D0%9F%D0%B5%D0%B2%D1%87%D0%B8%D0%B9_%D0%B4%D1%80%D0%BE%D0%B7%D0%B4_%D0%BD%D0%B0_%D0%BF%D0%B5%D0%BD%D1%8C%D0%BA%D0%B5_%28Turdus_philomelos%29%2C_%D0%91%D0%B8%D1%82%D1%86%D0%B5%D0%B2%D1%81%D0%BA%D0%B8%D0%B9_%D0%BB%D0%B5%D1%81.jpg/960px-%D0%9F%D0%B5%D0%B2%D1%87%D0%B8%D0%B9_%D0%B4%D1%80%D0%BE%D0%B7%D0%B4_%D0%BD%D0%B0_%D0%BF%D0%B5%D0%BD%D1%8C%D0%BA%D0%B5_%28Turdus_philomelos%29%2C_%D0%91%D0%B8%D1%82%D1%86%D0%B5%D0%B2%D1%81%D0%BA%D0%B8%D0%B9_%D0%BB%D0%B5%D1%81.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:%D0%9F%D0%B5%D0%B2%D1%87%D0%B8%D0%B9_%D0%B4%D1%80%D0%BE%D0%B7%D0%B4_%D0%BD%D0%B0_%D0%BF%D0%B5%D0%BD%D1%8C%D0%BA%D0%B5_(Turdus_philomelos),_%D0%91%D0%B8%D1%82%D1%86%D0%B5%D0%B2%D1%81%D0%BA%D0%B8%D0%B9_%D0%BB%D0%B5%D1%81.jpg",
-    "author": "Dion Art",
-    "license": "CC BY-SA 4.0"
-  },
   "eurbla": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Common_Blackbird.jpg/960px-Common_Blackbird.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "source": "https://commons.wikimedia.org/wiki/File:Common_Blackbird.jpg",
@@ -137,6 +161,12 @@
     "author": "caroline legg",
     "license": "CC BY 2.0"
   },
+  "hawfin": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/48/Hawfinch_%28Coccothraustes_coccothraustes%29_male_Drenthe.jpg/960px-Hawfinch_%28Coccothraustes_coccothraustes%29_male_Drenthe.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Hawfinch_(Coccothraustes_coccothraustes)_male_Drenthe.jpg",
+    "author": "Charles J. Sharp",
+    "license": "CC BY-SA 4.0"
+  },
   "eurgre1": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/Chloris_chloris_%28profile%29.jpg/960px-Chloris_chloris_%28profile%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "source": "https://commons.wikimedia.org/wiki/File:Chloris_chloris_(profile).jpg",
@@ -155,17 +185,35 @@
     "author": "Giles Laurent",
     "license": "CC BY-SA 4.0"
   },
+  "reebun": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Reed_Bunting_-_Emberiza_schoeniclus_%2852015951301%29.jpg/960px-Reed_Bunting_-_Emberiza_schoeniclus_%2852015951301%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Reed_Bunting_-_Emberiza_schoeniclus_(52015951301).jpg",
+    "author": "caroline legg",
+    "license": "CC BY 2.0"
+  },
+  "stodov1": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/Pigeon_colombin_%28Colulmba_oenas%29%2C_Parc_de_Woluwe%2C_Bruxelles_%2851921513878%29.jpg/960px-Pigeon_colombin_%28Colulmba_oenas%29%2C_Parc_de_Woluwe%2C_Bruxelles_%2851921513878%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Pigeon_colombin_(Colulmba_oenas),_Parc_de_Woluwe,_Bruxelles_(51921513878).jpg",
+    "author": "Frank Vassen from Brussels, Belgium",
+    "license": "CC BY 2.0"
+  },
+  "mewgul": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Larus_canus_Common_Gull_in_Norway.jpg/960px-Larus_canus_Common_Gull_in_Norway.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Larus_canus_Common_Gull_in_Norway.jpg",
+    "author": "Andreas Trepte",
+    "license": "CC BY-SA 2.5"
+  },
+  "sonthr1": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/%D0%9F%D0%B5%D0%B2%D1%87%D0%B8%D0%B9_%D0%B4%D1%80%D0%BE%D0%B7%D0%B4_%D0%BD%D0%B0_%D0%BF%D0%B5%D0%BD%D1%8C%D0%BA%D0%B5_%28Turdus_philomelos%29%2C_%D0%91%D0%B8%D1%82%D1%86%D0%B5%D0%B2%D1%81%D0%BA%D0%B8%D0%B9_%D0%BB%D0%B5%D1%81.jpg/960px-%D0%9F%D0%B5%D0%B2%D1%87%D0%B8%D0%B9_%D0%B4%D1%80%D0%BE%D0%B7%D0%B4_%D0%BD%D0%B0_%D0%BF%D0%B5%D0%BD%D1%8C%D0%BA%D0%B5_%28Turdus_philomelos%29%2C_%D0%91%D0%B8%D1%82%D1%86%D0%B5%D0%B2%D1%81%D0%BA%D0%B8%D0%B9_%D0%BB%D0%B5%D1%81.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:%D0%9F%D0%B5%D0%B2%D1%87%D0%B8%D0%B9_%D0%B4%D1%80%D0%BE%D0%B7%D0%B4_%D0%BD%D0%B0_%D0%BF%D0%B5%D0%BD%D1%8C%D0%BA%D0%B5_(Turdus_philomelos),_%D0%91%D0%B8%D1%82%D1%86%D0%B5%D0%B2%D1%81%D0%BA%D0%B8%D0%B9_%D0%BB%D0%B5%D1%81.jpg",
+    "author": "Dion Art",
+    "license": "CC BY-SA 4.0"
+  },
   "eursis": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/Eurasian_siskin_%28Spinus_spinus%29_male_Biebrzanski.jpg/960px-Eurasian_siskin_%28Spinus_spinus%29_male_Biebrzanski.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "source": "https://commons.wikimedia.org/wiki/File:Eurasian_siskin_(Spinus_spinus)_male_Biebrzanski.jpg",
     "author": "Charles J. Sharp",
     "license": "CC BY-SA 4.0"
-  },
-  "rinphe1": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Phasianus_colchicus_Oulu_20200524_02.jpg/960px-Phasianus_colchicus_Oulu_20200524_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Phasianus_colchicus_Oulu_20200524_02.jpg",
-    "author": "Estormiz",
-    "license": "CC0"
   },
   "graher1": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Il_pescatore_solitario.jpg/960px-Il_pescatore_solitario.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
@@ -185,18 +233,6 @@
     "author": "Charles J. Sharp",
     "license": "CC BY-SA 4.0"
   },
-  "fieldf": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Turdus_pilaris_EM1B9020_%2834450664312%29.jpg/960px-Turdus_pilaris_EM1B9020_%2834450664312%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Turdus_pilaris_EM1B9020_(34450664312).jpg",
-    "author": "Bengt Nyman from Vaxholm, Sweden",
-    "license": "CC BY 2.0"
-  },
-  "reebun": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Reed_Bunting_-_Emberiza_schoeniclus_%2852015951301%29.jpg/960px-Reed_Bunting_-_Emberiza_schoeniclus_%2852015951301%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Reed_Bunting_-_Emberiza_schoeniclus_(52015951301).jpg",
-    "author": "caroline legg",
-    "license": "CC BY 2.0"
-  },
   "whoswa": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Cygnus_cygnus_Singschwan.jpg/960px-Cygnus_cygnus_Singschwan.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "source": "https://commons.wikimedia.org/wiki/File:Cygnus_cygnus_Singschwan.jpg",
@@ -214,12 +250,6 @@
     "source": "https://commons.wikimedia.org/wiki/File:Perdrix_rouge.jpg",
     "author": "Pierre Dalous",
     "license": "CC BY-SA 3.0"
-  },
-  "commoo3": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/Common_moorhen_%28Gallinula_chloropus%29_France.jpg/960px-Common_moorhen_%28Gallinula_chloropus%29_France.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Common_moorhen_(Gallinula_chloropus)_France.jpg",
-    "author": "Alexis Lours",
-    "license": "CC BY 4.0"
   },
   "bkhgul": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/Chroicocephalus_ridibundus_%28summer%29.jpg/960px-Chroicocephalus_ridibundus_%28summer%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
@@ -299,12 +329,6 @@
     "author": "Joe Pell",
     "license": "CC BY 2.0"
   },
-  "comkin1": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Alcedo_atthis_-England-8_%28cropped%29.jpg/960px-Alcedo_atthis_-England-8_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Alcedo_atthis_-England-8_(cropped).jpg",
-    "author": "Tony Wood",
-    "license": "CC BY 2.0"
-  },
   "euhgul1": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/European_herring_gull_vocalizing_%2800170%29.jpg/960px-European_herring_gull_vocalizing_%2800170%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "source": "https://commons.wikimedia.org/wiki/File:European_herring_gull_vocalizing_(00170).jpg",
@@ -334,17 +358,5 @@
     "source": "https://commons.wikimedia.org/wiki/File:2019-03-25_Anser_brachyrhynchus,_Killingworth_Lake,_Northumberland_1.jpg",
     "author": "MPF",
     "license": "CC BY-SA 4.0"
-  },
-  "goldcr1": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Goldcrest_1.jpg/960px-Goldcrest_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Goldcrest_1.jpg",
-    "author": "Francis C. Franklin",
-    "license": "CC BY-SA 3.0"
-  },
-  "eutspa": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Tree_Sparrow_August_2007_Osaka_Japan.jpg/960px-Tree_Sparrow_August_2007_Osaka_Japan.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Tree_Sparrow_August_2007_Osaka_Japan.jpg",
-    "author": "Laitche",
-    "license": "Public domain"
   }
 }
