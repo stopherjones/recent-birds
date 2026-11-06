@@ -1,0 +1,50 @@
+name: Convert drawings to WebP
+
+on:
+  push:
+    paths:
+      - 'images/src/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - run: pip install pillow
+
+      - name: Convert to WebP
+        run: |
+          python - <<'EOF'
+          import glob, os
+          from PIL import Image
+          for src in glob.glob('images/src/*'):
+              if not src.lower().endswith(('.png', '.jpg', '.jpeg')):
+                  continue
+              name = os.path.splitext(os.path.basename(src))[0]
+              im = Image.open(src)
+              im = im.convert('RGBA') if im.mode in ('RGBA', 'LA', 'P') else im.convert('RGB')
+              im.thumbnail((600, 600))
+              im.save(f'images/{name}.webp', 'WEBP', quality=85, method=6)
+              print(f'{src} -> images/{name}.webp')
+          EOF
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add images/*.webp
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Convert drawings to WebP"
+            git push
+          fi
