@@ -7,33 +7,41 @@
 <style>
   :root { --paper:#e9e4d6; --ink:#3b3a33; --muted:#7d7a6c; --line:#c9c3b0; }
   * { box-sizing:border-box; }
-  body { margin:0; background:var(--paper); color:var(--ink); font-family:Georgia,"Times New Roman",serif; }
-  header { text-align:center; padding:36px 16px 4px; }
+  html, body { height:100%; }
+  body {
+    margin:0; background:var(--paper); color:var(--ink); font-family:Georgia,"Times New Roman",serif;
+    display:flex; flex-direction:column; min-height:100vh; min-height:100dvh;
+  }
+  header { text-align:center; padding:28px 16px 4px; flex:none; }
   .kicker { font:500 12px/1 system-ui,sans-serif; letter-spacing:.24em; text-transform:uppercase; color:var(--muted); }
   h1 { font-weight:400; font-size:clamp(34px,6vw,56px); margin:12px 0 6px; }
   .sub { font:13px/1.4 system-ui,sans-serif; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
 
-  /* Height grows with the number of drawings; positions are set by the script */
-  .sheet { position:relative; width:min(960px,94vw); margin:18px auto 0; min-height:200px; }
+  /* The sheet takes the remaining height and width; the script lays the drawings out to fit it */
+  .sheet { position:relative; flex:1; width:min(1200px,96vw); margin:8px auto 0; min-height:240px; }
   .sheet button {
     position:absolute; background:none; border:0; padding:0; cursor:pointer;
-    transform:translateX(var(--cx,0)) rotate(var(--r)) scaleX(var(--flip));
+    transform:rotate(var(--r)); text-align:center;
   }
   .sheet img {
     display:block; width:100%; height:auto; mix-blend-mode:multiply;
     filter:drop-shadow(0 4px 5px rgba(60,50,30,.12));
+    transform:scaleX(var(--flip));
   }
+
   .sheet button[aria-pressed="true"] img, .sheet button:focus-visible img {
     filter:drop-shadow(0 0 4px rgba(60,50,30,.5)) drop-shadow(0 4px 5px rgba(60,50,30,.12));
   }
 
-  .caption { width:min(960px,94vw); margin:8px auto 0; min-height:72px; text-align:center; padding:12px 8px; border-top:1px solid var(--line); }
+  /* Name and link sit at the bottom of the page */
+  .caption { flex:none; width:min(1200px,96vw); margin:0 auto; min-height:84px; text-align:center; padding:12px 8px 18px; border-top:1px solid var(--line); }
   .caption .name { font-size:20px; }
+  .caption .name a { color:inherit; text-decoration:none; border-bottom:1px dotted var(--muted); }
+  .caption .name a:hover { border-bottom-style:solid; }
   .caption .sci { font-style:italic; color:var(--muted); font-size:14px; }
   .caption .meta { font:12px/1.5 system-ui,sans-serif; color:var(--muted); margin-top:4px; }
   .caption .meta b { font-weight:500; color:var(--ink); }
   .caption .hint { font:12px/1.5 system-ui,sans-serif; color:var(--muted); }
-  footer { text-align:center; font:12px/1.5 system-ui,sans-serif; color:var(--muted); padding:20px 16px 40px; }
 </style>
 </head>
 <body>
@@ -46,23 +54,18 @@
 <main class="sheet" id="sheet" aria-live="polite"></main>
 <section class="caption" id="caption"><div class="hint" id="hint">Loading sightings…</div></section>
 
-<footer id="foot">Only species with a drawing in <code>images/</code> are shown.</footer>
-
 <script>
-// Paths are relative to this page, which sits at the project root. Serve the project (e.g. GitHub Pages or a local server);
-// browsers block fetch() for files opened straight from disk.
+// Paths are relative to this page, which sits at the project root. Serve the project
+// (GitHub Pages or a local server); browsers block fetch() for files opened straight from disk.
 const DATA_URL = 'data/sightings.json';
 const IMG_DIR  = 'images/';
-const COLS = 4;          // drawings per row
-const ROW_H = 170;       // px between rows
+const MAX_BIRDS = 24;       // species shown on the page
 
-// Show at most SHOW species.
+// Show at most MAX_BIRDS species.
 // Order: new species first (first recorded in the last two days), then the longest
 // absence before the latest return (absenceDays), then the latest sighting.
-const SHOW = 24;
 const NEW_WINDOW_MS = 2 * 24 * 60 * 60 * 1000;
-const ts = s => Date.parse(String(s || '').replace(' ', 'T'));
-function isNew(o) { return !!o.firstSeen && (Date.now() - ts(o.firstSeen)) < NEW_WINDOW_MS; }
+function isNew(o) { return !!o.firstSeen && (Date.now() - Date.parse(String(o.firstSeen).replace(' ', 'T'))) < NEW_WINDOW_MS; }
 function byPriority(a, b) {
   const n = Number(isNew(b)) - Number(isNew(a));
   if (n !== 0) return n;
@@ -74,6 +77,7 @@ function byPriority(a, b) {
 const sheet = document.getElementById('sheet');
 const caption = document.getElementById('caption');
 const hint = document.getElementById('hint');
+let items = [];
 let active = null;
 
 // Stable pseudo-random number per species, so the layout doesn't reshuffle on reload
@@ -84,7 +88,7 @@ function drawingExists(code) {
     const im = new Image();
     im.onload = () => resolve(true);
     im.onerror = () => resolve(false);
-    im.src = IMG_DIR + code + '.png';
+    im.src = IMG_DIR + code + '.webp';
   });
 }
 
@@ -94,20 +98,17 @@ async function load() {
     if (!res.ok) throw new Error('sightings returned ' + res.status);
     const data = await res.json();
 
-    // Latest sighting per species
-    const obs = (data.observations || []).slice().sort(byPriority);
+    // One entry per species (the job already does this; guard anyway), in priority order
     const seen = new Set();
-    const unique = [];
-    for (const o of obs) {
-      if (!o.speciesCode || seen.has(o.speciesCode)) continue;
-      seen.add(o.speciesCode);
-      unique.push(o);
-    }
+    const unique = (data.observations || [])
+      .filter(o => o.speciesCode)
+      .slice().sort(byPriority)
+      .filter(o => !seen.has(o.speciesCode) && seen.add(o.speciesCode));
 
-    // Keep only species that have a drawing
+    // Keep only species that have a drawing, up to MAX_BIRDS
     const checks = await Promise.all(unique.map(async o => (await drawingExists(o.speciesCode)) ? o : null));
-    const items = checks.filter(Boolean).slice(0, SHOW);
-    layout(items);
+    items = checks.filter(Boolean).slice(0, MAX_BIRDS);
+    layout();
 
     hint.textContent = items.length
       ? 'Tap a bird to see its name and where it was seen'
@@ -117,36 +118,63 @@ async function load() {
   }
 }
 
-function layout(items) {
+// Seeded random numbers, so each species always gets the same place for the same window size
+function rng(seed) {
+  let x = seed || 1;
+  return () => { x = (x * 1664525 + 1013904223) >>> 0; return x / 4294967296; };
+}
+
+// Poster layout: birds of varied sizes, scattered with no overlap.
+// Each bird tries many spots; if none is free, it shrinks slightly and tries again.
+function layout() {
   sheet.innerHTML = '';
-  const rows = Math.max(1, Math.ceil(items.length / COLS));
-  sheet.style.height = (rows * ROW_H + 40) + 'px';
+  const n = items.length;
+  if (!n) return;
+  const W = sheet.clientWidth, H = sheet.clientHeight;
+  if (!W || !H) return;
+
+  const margin = 6;
+  const base = Math.sqrt((W * H) / n) * 0.95;      // typical width for an even spread
+  const placed = [];                               // boxes already used: {x, y, w, h}
+  const hits = (x, y, w, h) => placed.some(p =>
+    x < p.x + p.w && x + w > p.x && y < p.y + p.h && y + h > p.y);
 
   items.forEach((o, i) => {
     const h = hash(o.speciesCode);
-    const row = Math.floor(i / COLS);
-    const inRow = Math.min(COLS, items.length - row * COLS);   // items in this row
-    const k = i % COLS;                                        // position within the row
-    const slot = 100 / inRow;
-    const cx = (k + 0.5) * slot;                               // centre of this slot, %
-    const jx = (h % 31) - 15;                    // px jitter
-    const jy = ((h >> 5) % 41) - 20;             // px jitter
-    const w = 20 + ((h >> 10) % 11);             // width as % of the sheet, 20–30
-    const r = ((h >> 14) % 17) - 8;              // tilt in degrees
-    const flip = (h >> 18) % 2 ? -1 : 1;
+    const rand = rng(h);
+    // Size: earlier (newer / longer-absent) birds a little larger, plus natural variation
+    let w = Math.min(base * (i < 3 ? 1.2 : 1) * (0.78 + rand() * 0.45), W * 0.42);
+    const r = (rand() * 14) - 7;                   // tilt, degrees
+    const flip = rand() < 0.5 ? -1 : 1;
+
+    let spot = null;
+    for (let shrink = 0; shrink < 12 && !spot; shrink++) {
+      const boxH = w * 1.35;                       // drawing height, generous estimate so birds never touch
+      const maxX = W - w - margin, maxY = H - boxH - margin;
+      if (maxX <= margin || maxY <= margin) { w *= 0.92; continue; }
+      for (let t = 0; t < 300 && !spot; t++) {
+        const x = margin + rand() * (maxX - margin);
+        const y = margin + rand() * (maxY - margin);
+        if (!hits(x, y, w, boxH)) spot = { x, y, h: boxH };
+      }
+      if (!spot) w *= 0.92;                        // no room at this size: shrink and retry
+    }
+    if (!spot) return;                             // sheet is full; leave the rest off
+    placed.push({ x: spot.x, y: spot.y, w, h: spot.h });
 
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.setAttribute('aria-label', o.comName || o.speciesCode);
     btn.setAttribute('aria-pressed', 'false');
-    btn.style.cssText =
-      `left:${cx}%;` +
-      `top:${row * ROW_H + jy + 20}px;` +
-      `width:${w}%;` +
-      `--r:${r}deg;--flip:${flip};--cx:-50%;z-index:${i};`;
+    btn.style.left = spot.x + 'px';
+    btn.style.top = spot.y + 'px';
+    btn.style.width = w + 'px';
+    btn.style.setProperty('--r', r + 'deg');
+    btn.style.setProperty('--flip', flip);
+    btn.style.zIndex = i;
 
     const img = document.createElement('img');
-    img.src = IMG_DIR + o.speciesCode + '.png';
+    img.src = IMG_DIR + o.speciesCode + '.webp';
     img.alt = '';
     btn.append(img);
     btn.onclick = () => show(o, btn);
@@ -161,11 +189,23 @@ function show(o, btn) {
   const when = o.obsDt ? new Date(o.obsDt.replace(' ', 'T')).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
   caption.innerHTML =
     `<div class="name"></div><div class="sci"></div><div class="meta"><b></b> · <span></span></div>`;
-  caption.querySelector('.name').textContent = o.comName || '';
+  const link = document.createElement('a');
+  link.href = 'https://ebird.org/species/' + encodeURIComponent(o.speciesCode);
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  link.textContent = o.comName || '';
+  caption.querySelector('.name').append(link);
   caption.querySelector('.sci').textContent = o.sciName || '';
   caption.querySelector('.meta b').textContent = (o.locName || '').split(',')[0].trim();
   caption.querySelector('.meta span').textContent = when + (isNew(o) ? ' · new' : '');
 }
+
+// Re-layout when the window changes shape (rotation, resize)
+let resizeTimer;
+new ResizeObserver(() => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(layout, 120);
+}).observe(sheet);
 
 load();
 </script>
