@@ -95,7 +95,7 @@ function drawingExists(code) {
     const im = new Image();
     im.onload = () => resolve(true);
     im.onerror = () => resolve(false);
-    im.src = IMG_DIR + code + '.png';
+    im.src = IMG_DIR + code + '.webp';
   });
 }
 
@@ -180,7 +180,7 @@ function layout() {
     btn.style.zIndex = i;
 
     const img = document.createElement('img');
-    img.src = IMG_DIR + o.speciesCode + '.png';
+    img.src = IMG_DIR + o.speciesCode + '.webp';
     img.alt = '';
     btn.append(img);
     btn.onclick = () => show(o, btn);
