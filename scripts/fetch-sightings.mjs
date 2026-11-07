@@ -9,8 +9,8 @@ const EBIRD_LNG = (process.env.EBIRD_LNG || '').trim();
 if (!EBIRD_API_KEY || !EBIRD_LAT || !EBIRD_LNG) {
   throw new Error('Missing EBIRD_API_KEY, EBIRD_LAT or EBIRD_LNG');
 }
-const DIST_KM = 12;
-const DAYS_BACK = 7;
+const DIST_KM = 10;
+const DAYS_BACK = 3;
 const UA = 'recent-birds/1.0 (https://github.com/stopherjones/recent-birds)';
 const COMMONS_API = 'https://commons.wikimedia.org/w/api.php';
 const AVOID = /\b(map|distribution|range|egg|nest|skull|feather|illustration|drawing|painting|stamp|logo|specimen)\b/i;

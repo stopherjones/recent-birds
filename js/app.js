@@ -84,7 +84,7 @@ async function loadDaily(){
       fetch('data/species-photos.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{}).catch(()=>({}))
     ]);
     photoMap=photos;
-    render(sightings.observations||[],null,'YOUR LOCAL PATCH · 12 KM · 7 DAYS');
+    render(sightings.observations||[],null,'YOUR LOCAL PATCH · 10 KM · 7 DAYS');
     status(`Updated ${new Date(sightings.generatedAt).toLocaleString('en-GB')}.`);
   }catch(e){status('Could not load the daily sightings: '+e.message,true)}
 }
