@@ -10,7 +10,7 @@ if (!EBIRD_API_KEY || !EBIRD_LAT || !EBIRD_LNG) {
   throw new Error('Missing EBIRD_API_KEY, EBIRD_LAT or EBIRD_LNG');
 }
 const DIST_KM = 10;
-const DAYS_BACK = 3;
+const DAYS_BACK = 7;
 const UA = 'recent-birds/1.0 (https://github.com/stopherjones/recent-birds)';
 const COMMONS_API = 'https://commons.wikimedia.org/w/api.php';
 const AVOID = /\b(map|distribution|range|egg|nest|skull|feather|illustration|drawing|painting|stamp|logo|specimen)\b/i;
@@ -42,8 +42,9 @@ for (const o of observations) {
   if (!cur || toMs(o.obsDt) > toMs(cur.obsDt)) latestBySpecies.set(o.speciesCode, o);
 }
 
-// Update history. A sighting more than DAYS_BACK after the last one means the bird
-// was missing from the feed in between, so that gap is recorded as an absence.
+// Update history. Each new sighting records the time since the previous one (absenceDays),
+// so a bird seen on 4 Nov and again on 6 Nov has absenceDays 2.
+// Gaps are only known between daily runs, so they are measured run to run.
 for (const [code, o] of latestBySpecies) {
   const h = history[code];
   if (!h) {
@@ -51,8 +52,7 @@ for (const [code, o] of latestBySpecies) {
     continue;
   }
   if (toMs(o.obsDt) > toMs(h.lastSeen)) {
-    const gap = (toMs(o.obsDt) - toMs(h.lastSeen)) / DAY;
-    if (gap > DAYS_BACK) h.absenceDays = Math.round(gap);
+    h.absenceDays = Math.round(((toMs(o.obsDt) - toMs(h.lastSeen)) / DAY) * 10) / 10;
     h.lastSeen = o.obsDt;
   }
 }

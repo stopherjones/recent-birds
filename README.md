@@ -1,13 +1,13 @@
 # Recent Birds
 
-A static page showing bird species recently reported by eBird within 12 km of a fixed point, with one photo per species. Each species name links to its eBird species page.
+A static page showing bird species recently reported by eBird within 10 km of a fixed point, with one photo per species. Each species name links to its eBird species page.
 
 **Live page:** https://stopherjones.github.io/recent-birds/
 
 ## How it works
 
 - A GitHub Action runs daily at 23:00 UTC (`.github/workflows/daily.yml`).
-- It calls the eBird API for observations from the last 7 days within 12 km of the configured point (`scripts/fetch-sightings.mjs`).
+- It calls the eBird API for observations from the last 7 days within 10 km of the configured point (`scripts/fetch-sightings.mjs`).
 - It finds one reusable photo per species, using the Wikipedia main photo first and a Wikimedia Commons search as fallback. Only freely licensed images (CC BY, CC BY-SA, CC0, public domain) without no-derivatives or non-commercial terms are used.
 - It writes `data/sightings.json` and `data/species-photos.json` and commits them to `main`. GitHub Pages redeploys from `main`.
 - The page (`index.html`, `js/app.js`, `css/style.css`) loads those two JSON files when it opens. It doesn't call eBird directly.
@@ -38,7 +38,7 @@ Set these as repository secrets (Settings → Secrets and variables → Actions)
 
 The centre point is kept in secrets so it isn't published in the repo. The sightings in `data/sightings.json` still show the general area, because eBird includes each record's location.
 
-The search radius (12 km) and window (7 days) are set at the top of `scripts/fetch-sightings.mjs` (`DIST_KM`, `DAYS_BACK`).
+The search radius (10 km) and window (7 days) are set at the top of `scripts/fetch-sightings.mjs` (`DIST_KM`, `DAYS_BACK`).
 
 ## Running it manually
 
@@ -46,7 +46,7 @@ Go to Actions → **Refresh bird sightings** → **Run workflow**. Use this afte
 
 ## "Find birds near me"
 
-The page also has a **Find birds near me** button. It asks the browser for the visitor's location and queries eBird through a Cloudflare Worker, which keeps the API key on the server side. The Worker address is set in the hidden `worker` field in `index.html`. This lookup uses a 12 km radius and makes a live call, so it isn't cached.
+The page also has a **Find birds near me** button. It asks the browser for the visitor's location and queries eBird through a Cloudflare Worker, which keeps the API key on the server side. The Worker address is set in the hidden `worker` field in `index.html`. This lookup starts at 5 km and widens to 10, 25 and then 50 km until it finds 24 species. Each step is a live call, so it isn't cached.
 
 The Worker is a pass-through to `api.ebird.org/v2`, and its `EBIRD_API_KEY` variable must hold a valid key.
 

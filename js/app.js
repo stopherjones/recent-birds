@@ -1,17 +1,18 @@
 const $=id=>document.getElementById(id);
 let photoMap={};
 // Show at most SHOW species.
-// Order: new species first (first recorded in the last two days), then the longest
-// absence before the latest return (absenceDays), then the latest sighting.
+// Order: no previous sighting first, then the longest gap since the previous sighting
+// (absenceDays), then the latest sighting.
 const SHOW = 24;
 const NEW_WINDOW_MS = 2 * 24 * 60 * 60 * 1000;
 const ts = s => Date.parse(String(s || '').replace(' ', 'T'));
 function isNew(o) { return !!o.firstSeen && (Date.now() - ts(o.firstSeen)) < NEW_WINDOW_MS; }
 function byPriority(a, b) {
-  const n = Number(isNew(b)) - Number(isNew(a));
-  if (n !== 0) return n;
-  const ga = a.absenceDays ?? -1, gb = b.absenceDays ?? -1;   // no recorded absence sorts last
-  if (ga !== gb) return gb - ga;
+  // No previous sighting (absenceDays null) comes first, then the longest gap since the
+  // previous sighting, then the most recent sighting.
+  const ga = a.absenceDays == null ? Infinity : a.absenceDays;
+  const gb = b.absenceDays == null ? Infinity : b.absenceDays;
+  if (ga !== gb) return gb > ga ? 1 : -1;
   return String(b.obsDt).localeCompare(String(a.obsDt));
 }
  const workerInput=$('worker');
