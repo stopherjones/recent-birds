@@ -42,6 +42,12 @@
   .caption .meta { font:12px/1.5 system-ui,sans-serif; color:var(--muted); margin-top:4px; }
   .caption .meta b { font-weight:500; color:var(--ink); }
   .caption .hint { font:12px/1.5 system-ui,sans-serif; color:var(--muted); }
+  .pager { flex:none; display:flex; justify-content:center; align-items:center; gap:10px; flex-wrap:wrap;
+    font:13px/1 system-ui,sans-serif; color:var(--muted); padding:6px 8px 0; }
+  .pager button { background:none; border:1px solid var(--line); border-radius:999px; padding:6px 12px;
+    font:inherit; color:var(--ink); cursor:pointer; }
+  .pager button[aria-pressed="true"] { background:var(--ink); color:var(--paper); border-color:var(--ink); }
+  .pager button:disabled { opacity:.4; cursor:default; }
 </style>
 </head>
 <body>
@@ -52,6 +58,7 @@
 </header>
 
 <main class="sheet" id="sheet" aria-live="polite"></main>
+<nav class="pager" id="pager" aria-label="Pagination"></nav>
 <section class="caption" id="caption"><div class="hint" id="hint">Loading sightings…</div></section>
 
 <script>
@@ -59,9 +66,8 @@
 // (GitHub Pages or a local server); browsers block fetch() for files opened straight from disk.
 const DATA_URL = 'data/sightings.json';
 const IMG_DIR  = 'images/';
-const MAX_BIRDS = 24;       // species shown on the page
 
-// Show at most MAX_BIRDS species.
+// Every species with a drawing is ranked here; paging controls how many show at once.
 // Order: no previous sighting first, then the longest gap since the previous sighting
 // (absenceDays), then the latest sighting.
 const NEW_WINDOW_MS = 2 * 24 * 60 * 60 * 1000;
@@ -106,12 +112,12 @@ async function load() {
       .slice().sort(byPriority)
       .filter(o => !seen.has(o.speciesCode) && seen.add(o.speciesCode));
 
-    // Keep only species that have a drawing, up to MAX_BIRDS
+    // Keep every species that has a drawing; paging decides how many show at once
     const checks = await Promise.all(unique.map(async o => (await drawingExists(o.speciesCode)) ? o : null));
-    items = checks.filter(Boolean).slice(0, MAX_BIRDS);
-    layout();
+    allItems = checks.filter(Boolean);
+    render();
 
-    hint.textContent = items.length
+    hint.textContent = allItems.length
       ? 'Tap a bird to see its name and where it was seen'
       : 'No drawings yet for these sightings';
   } catch (e) {
@@ -198,6 +204,47 @@ function show(o, btn) {
   caption.querySelector('.sci').textContent = o.sciName || '';
   caption.querySelector('.meta b').textContent = (o.locName || '').split(',')[0].trim();
   caption.querySelector('.meta span').textContent = when + (isNew(o) ? ' · new' : '');
+}
+
+// Paging: 12, 24 or all birds per page
+let allItems = [];
+let page = 0;
+let pageSize = 24;                                  // 12, 24 or 'all'
+
+function sizeNow() { return pageSize === 'all' ? Math.max(1, allItems.length) : pageSize; }
+function pageCount() { return Math.max(1, Math.ceil(allItems.length / sizeNow())); }
+
+function render() {
+  page = Math.min(page, pageCount() - 1);
+  const start = page * sizeNow();
+  items = allItems.slice(start, start + sizeNow());
+  active = null;
+  layout();
+  renderPager();
+}
+
+function renderPager() {
+  const nav = document.getElementById('pager');
+  const total = pageCount();
+  nav.innerHTML = '';
+  const add = (label, onClick, { pressed, disabled } = {}) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = label;
+    b.onclick = onClick;
+    if (pressed !== undefined) b.setAttribute('aria-pressed', String(pressed));
+    if (disabled) b.disabled = true;
+    nav.append(b);
+  };
+  add('‹ Prev', () => { page--; render(); }, { disabled: page === 0 });
+  for (const size of [12, 24, 'all']) {
+    add(size === 'all' ? 'All' : String(size), () => { pageSize = size; page = 0; render(); },
+        { pressed: pageSize === size });
+  }
+  add('Next ›', () => { page++; render(); }, { disabled: page >= total - 1 });
+  const info = document.createElement('span');
+  info.textContent = `Page ${page + 1} of ${total}`;
+  nav.append(info);
 }
 
 // Re-layout when the window changes shape (rotation, resize)

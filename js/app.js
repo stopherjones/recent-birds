@@ -38,10 +38,60 @@ const CC_ICON='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="1
 async function wikiPageImage(b){const title=b.sciName||b.comName;if(!title)return null;const p=new URLSearchParams({action:'query',format:'json',formatversion:'2',redirects:'1',titles:title,prop:'pageimages',piprop:'name',origin:'*'});const r=await fetch('https://en.wikipedia.org/w/api.php?'+p);if(!r.ok)throw new Error('Wikipedia returned '+r.status);const d=await r.json();const file=d.query?.pages?.[0]?.pageimage;if(!file)return null;const q=new URLSearchParams({action:'query',format:'json',formatversion:'2',titles:'File:'+file,prop:'imageinfo',iiprop:'url|mime|extmetadata',iiurlwidth:'800',origin:'*'});const c=await fetch(COMMONS_API+'?'+q);if(!c.ok)throw new Error('Wikimedia Commons returned '+c.status);const cd=await c.json();const info=cd.query?.pages?.[0]?.imageinfo?.[0];if(!info)return null;const meta=info.extmetadata||{};if(!String(info.mime||'').startsWith('image/')||info.mime.includes('svg')||!reusableLicense(meta))return null;return {image:info.thumburl||info.url,source:info.descriptionurl||'',title:file,author:metadataText(meta.Artist?.value||meta.Credit?.value||'Photographer not listed'),license:metadataText(meta.LicenseShortName?.value||meta.UsageTerms?.value||'Licence details on source page')}}
 async function findCommonsImage(b){if(b.speciesCode&&Object.prototype.hasOwnProperty.call(photoMap,b.speciesCode))return photoMap[b.speciesCode];let failed=false;const cached=cachedCommonsImage(b);if(cached)return cached.notFound?null:cached;try{const w=await wikiPageImage(b);if(w){saveCommonsImage(b,w);return w}}catch(e){console.warn('Wikipedia image failed',e)}const queries=[b.sciName,b.comName].filter((v,i,a)=>v&&a.indexOf(v)===i);for(const query of queries){try{const items=await searchCommons(query);const chosen=chooseCommonsImage(items,b);if(chosen){const result={image:chosen.image,source:chosen.source,title:chosen.title,author:chosen.author,license:chosen.license};saveCommonsImage(b,result);return result}}catch(e){failed=true;commonsErrors.push(e.message);console.warn('Commons search failed for '+query,e)}}if(!failed)saveCommonsImage(b,{notFound:true});return null}
 async function loadCommonsImages(birds,version){let found=0,checked=0;for(let i=0;i<birds.length;i+=3){if(version!==renderVersion)return;const batch=birds.slice(i,i+3);const results=await Promise.all(batch.map(findCommonsImage));if(version!==renderVersion)return;results.forEach((result,j)=>{const article=$('birds').querySelector(`[data-bird-index="${i+j}"]`);if(!article||!result)return;const placeholder=article.querySelector('.art');if(!placeholder)return;found++;const photo=document.createElement('div');photo.className='photo';const img=document.createElement('img');img.loading='lazy';img.src=result.image;img.alt=birds[i+j].comName||'Bird photograph';img.onerror=()=>{photo.remove();credit.remove()};photo.append(img);const credit=document.createElement('div');credit.className='photo-credit';credit.hidden=true;const link=document.createElement('a');link.href=result.source;link.target='_blank';link.rel='noopener noreferrer';link.textContent=(result.author||'Photographer uncredited')+' · '+(result.license||'Licence details');credit.append(link);const btn=document.createElement('button');btn.type='button';btn.className='cc-btn';btn.setAttribute('aria-label','Show photo credit');btn.setAttribute('aria-expanded','false');btn.innerHTML=CC_ICON;btn.onclick=()=>{credit.hidden=!credit.hidden;btn.setAttribute('aria-expanded',String(!credit.hidden))};photo.append(btn);placeholder.replaceWith(photo);photo.insertAdjacentElement('afterend',credit)});checked+=batch.length}if(version===renderVersion){const had=commonsErrors.length>0;const err=had?` Errors: ${commonsErrors.slice(-2).join('; ')}`:'';commonsErrors=[];status(`Wikimedia Commons: photographs found for ${found} of ${checked} displayed species. Credits link to the original files.`+err,had&&found===0)}}
-function render(data,coords,label){const sorted=[...data].sort(byPriority);const unique=[...new Map(sorted.map(x=>[x.speciesCode||x.comName,x])).values()];const birds=unique.slice(0,SHOW);const version=++renderVersion;
-$('birds').innerHTML=birds.length?birds.map((b,i)=>`<article class="bird" data-bird-index="${i}"><div class="art" aria-hidden="true">❧</div><h2>${speciesLink(b)}</h2><div class="latin">${esc(b.sciName||'')}</div><div class="detail">${esc(b.locName||'Nearby')} · ${esc(prettyDate(b.obsDt))}</div></article>`).join(''):`<div class="empty">No observations were returned for this area and period.<br>Try again later or increase the search radius.</div>`;
-$('summary').textContent=`${unique.length} species recently reported within 10 km`;$('count').textContent=`${unique.length} species · ${data.length} records`;$('updated').textContent=`Updated ${new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})} · eBird`;
-if(birds.length)loadCommonsImages(birds,version);
+// Paging state for the live page: 12, 24 or 'all' per page
+let pageAll = [];
+let pageNo = 0;
+let pageSizeSel = 24;
+let pageLabel = '';
+
+function renderPage() {
+  const len = pageAll.length;
+  const size = pageSizeSel === 'all' ? Math.max(1, len) : pageSizeSel;
+  const pages = Math.max(1, Math.ceil(len / size));
+  pageNo = Math.min(pageNo, pages - 1);
+  const birds = pageAll.slice(pageNo * size, pageNo * size + size);
+  const version = ++renderVersion;
+  $('birds').innerHTML = birds.length
+    ? birds.map((b,i)=>`<article class="bird" data-bird-index="${i}"><div class="art" aria-hidden="true">❧</div><h2>${speciesLink(b)}</h2><div class="latin">${esc(b.sciName||'')}</div><div class="detail">${esc(b.locName||'Nearby')} · ${esc(prettyDate(b.obsDt))}</div></article>`).join('')
+    : `<div class="empty">No observations were returned for this area and period.<br>Try again later or increase the search radius.</div>`;
+  renderPager(pages);
+  if (birds.length) loadCommonsImages(birds, version);
+}
+
+function renderPager(pages) {
+  const nav = document.getElementById('pager');
+  if (!nav) return;
+  nav.innerHTML = '';
+  if (!pageAll.length) return;
+  const add = (label, onClick, { pressed, disabled } = {}) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = label;
+    b.onclick = onClick;
+    if (pressed !== undefined) b.setAttribute('aria-pressed', String(pressed));
+    if (disabled) b.disabled = true;
+    nav.append(b);
+  };
+  add('‹ Prev', () => { pageNo--; renderPage(); }, { disabled: pageNo === 0 });
+  for (const size of [12, 24, 'all']) {
+    add(size === 'all' ? 'All' : String(size), () => { pageSizeSel = size; pageNo = 0; renderPage(); },
+        { pressed: pageSizeSel === size });
+  }
+  add('Next ›', () => { pageNo++; renderPage(); }, { disabled: pageNo >= pages - 1 });
+  const info = document.createElement('span');
+  info.textContent = `Page ${pageNo + 1} of ${pages}`;
+  nav.append(info);
+}
+
+function render(data,coords,label){
+  const sorted=[...data].sort(byPriority);
+  const unique=[...new Map(sorted.map(x=>[x.speciesCode||x.comName,x])).values()];
+  pageAll = unique;
+  pageLabel = label;
+  $('summary').textContent=`${unique.length} species recently reported within 10 km`;
+  $('count').textContent=`${unique.length} species · ${data.length} records`;
+  $('updated').textContent=`Updated ${new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})} · eBird`;
+  renderPage();
 }
 // Near me: widen the radius until SHOW species are found (or 50 km, eBird's maximum).
 // Results are rendered after each step, so the first ones appear straight away.

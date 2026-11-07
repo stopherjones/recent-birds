@@ -6,3 +6,10 @@
 .empty{grid-column:1/-1;text-align:center;padding:65px 20px;color:#68746d;font:14px/1.7 system-ui,sans-serif}.footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:24px;padding-top:12px;font:10px system-ui,sans-serif;color:#81867e;letter-spacing:.06em;text-transform:uppercase}.status{font:12px/1.5 system-ui,sans-serif;color:#65716b;margin:10px 0 0;min-height:20px}.status.error{color:#9b493b}.settings{margin:14px 0 0;padding:12px;background:#f7f5ee;border:1px solid #d4d0c4;font:12px system-ui,sans-serif;color:#69746d}.settings label{display:block;margin-bottom:6px}.settings input{width:min(100%,520px);padding:9px;border:1px solid #c5c9bf;background:white;font:12px system-ui,sans-serif}.fine{font:11px/1.5 system-ui,sans-serif;color:#82877f;margin-top:7px}
 @media(max-width:650px){body{padding:14px 9px}.poster{min-height:600px;padding:22px 15px}.birds{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.bird img,.bird .art{height:115px}.bird h2{font-size:17px}.photo-credit{font-size:8px}.toolbar{align-items:flex-start}.controls{width:100%}}
 @media print{body{background:white;padding:0}.toolbar,.settings,.status{display:none}.poster{box-shadow:none;border:0}.poster:before{inset:8px}}
+
+.pager { display:flex; justify-content:center; align-items:center; gap:10px; flex-wrap:wrap;
+  font:13px/1 system-ui,sans-serif; color:#7d7a6c; padding:18px 8px 28px; }
+.pager button { background:none; border:1px solid #c9c3b0; border-radius:999px; padding:6px 12px;
+  font:inherit; color:#3b3a33; cursor:pointer; }
+.pager button[aria-pressed="true"] { background:#3b3a33; color:#f7f5ef; border-color:#3b3a33; }
+.pager button:disabled { opacity:.4; cursor:default; }
