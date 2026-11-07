@@ -18,7 +18,7 @@
       "locationPrivate": true,
       "subId": "S408303990",
       "firstSeen": "2026-11-05 18:30",
-      "absenceDays": null
+      "absenceDays": 0.7
     },
     {
       "speciesCode": "rinphe1",
@@ -36,7 +36,7 @@
       "subId": "S408303990",
       "exoticCategory": "N",
       "firstSeen": "2026-11-05 18:30",
-      "absenceDays": null
+      "absenceDays": 0.7
     },
     {
       "speciesCode": "cowpig1",
@@ -53,7 +53,7 @@
       "locationPrivate": true,
       "subId": "S408303990",
       "firstSeen": "2026-11-05 18:30",
-      "absenceDays": null
+      "absenceDays": 0.7
     },
     {
       "speciesCode": "eucdov",
@@ -70,7 +70,7 @@
       "locationPrivate": true,
       "subId": "S408303990",
       "firstSeen": "2026-11-05 08:23",
-      "absenceDays": null
+      "absenceDays": 1.0
     },
     {
       "speciesCode": "eurmag1",
@@ -87,7 +87,7 @@
       "locationPrivate": true,
       "subId": "S408303990",
       "firstSeen": "2026-11-05 08:23",
-      "absenceDays": null
+      "absenceDays": 1.1
     },
     {
       "speciesCode": "eurjac",
@@ -104,7 +104,7 @@
       "locationPrivate": true,
       "subId": "S408303990",
       "firstSeen": "2026-11-05 08:23",
-      "absenceDays": null
+      "absenceDays": 1.1
     },
     {
       "speciesCode": "carcro1",
@@ -121,7 +121,7 @@
       "locationPrivate": true,
       "subId": "S408303990",
       "firstSeen": "2026-11-05 08:23",
-      "absenceDays": null
+      "absenceDays": 1.1
     },
     {
       "speciesCode": "blutit",
@@ -138,7 +138,7 @@
       "locationPrivate": true,
       "subId": "S408303990",
       "firstSeen": "2026-11-05 08:23",
-      "absenceDays": null
+      "absenceDays": 1.1
     },
     {
       "speciesCode": "gretit1",
@@ -155,7 +155,7 @@
       "locationPrivate": true,
       "subId": "S408303990",
       "firstSeen": "2026-11-05 08:23",
-      "absenceDays": null
+      "absenceDays": 1.1
     },
     {
       "speciesCode": "lottit1",
@@ -172,7 +172,7 @@
       "locationPrivate": true,
       "subId": "S408303990",
       "firstSeen": "2026-11-05 08:23",
-      "absenceDays": null
+      "absenceDays": 1.0
     },
     {
       "speciesCode": "goldcr1",
@@ -206,7 +206,7 @@
       "locationPrivate": true,
       "subId": "S408303990",
       "firstSeen": "2026-11-05 08:23",
-      "absenceDays": null
+      "absenceDays": 1.1
     },
     {
       "speciesCode": "eurbla",
@@ -223,7 +223,7 @@
       "locationPrivate": true,
       "subId": "S408303990",
       "firstSeen": "2026-11-05 08:23",
-      "absenceDays": null
+      "absenceDays": 1.1
     },
     {
       "speciesCode": "fieldf",
@@ -240,7 +240,7 @@
       "locationPrivate": true,
       "subId": "S408303990",
       "firstSeen": "2026-11-05 18:30",
-      "absenceDays": null
+      "absenceDays": 0.6
     },
     {
       "speciesCode": "eurrob1",
@@ -257,7 +257,7 @@
       "locationPrivate": true,
       "subId": "S408303990",
       "firstSeen": "2026-11-05 08:23",
-      "absenceDays": null
+      "absenceDays": 1.1
     },
     {
       "speciesCode": "dunnoc1",
@@ -274,7 +274,7 @@
       "locationPrivate": true,
       "subId": "S408303990",
       "firstSeen": "2026-11-05 08:23",
-      "absenceDays": null
+      "absenceDays": 1.1
     },
     {
       "speciesCode": "houspa",
@@ -291,7 +291,7 @@
       "locationPrivate": true,
       "subId": "S408303990",
       "firstSeen": "2026-11-05 08:23",
-      "absenceDays": null
+      "absenceDays": 1.0
     },
     {
       "speciesCode": "comcha",
@@ -308,7 +308,7 @@
       "locationPrivate": true,
       "subId": "S408303990",
       "firstSeen": "2026-11-05 08:23",
-      "absenceDays": null
+      "absenceDays": 1.0
     },
     {
       "speciesCode": "eurgre1",
@@ -325,7 +325,7 @@
       "locationPrivate": true,
       "subId": "S408303990",
       "firstSeen": "2026-11-05 08:23",
-      "absenceDays": null
+      "absenceDays": 1.1
     },
     {
       "speciesCode": "eurgol",
@@ -342,7 +342,7 @@
       "locationPrivate": true,
       "subId": "S408303990",
       "firstSeen": "2026-11-05 08:23",
-      "absenceDays": null
+      "absenceDays": 1.1
     },
     {
       "speciesCode": "gragoo",
@@ -358,7 +358,7 @@
       "locationPrivate": false,
       "subId": "S408236565",
       "firstSeen": "2026-11-05 18:30",
-      "absenceDays": null
+      "absenceDays": 0.7
     },
     {
       "speciesCode": "mutswa",
@@ -375,7 +375,7 @@
       "locationPrivate": false,
       "subId": "S408236565",
       "firstSeen": "2026-11-05 18:30",
-      "absenceDays": null
+      "absenceDays": 0.7
     },
     {
       "speciesCode": "commoo3",
@@ -392,7 +392,7 @@
       "locationPrivate": false,
       "subId": "S408236565",
       "firstSeen": "2026-11-05 18:30",
-      "absenceDays": null
+      "absenceDays": 0.7
     },
     {
       "speciesCode": "eurwoo",
@@ -494,7 +494,7 @@
       "locationPrivate": true,
       "subId": "S408089177",
       "firstSeen": "2026-11-05 08:23",
-      "absenceDays": null
+      "absenceDays": 1.1
     },
     {
       "speciesCode": "meapip1",
@@ -511,7 +511,7 @@
       "locationPrivate": true,
       "subId": "S408089177",
       "firstSeen": "2026-11-05 08:23",
-      "absenceDays": null
+      "absenceDays": 1.1
     },
     {
       "speciesCode": "hawfin",
@@ -562,7 +562,7 @@
       "locationPrivate": true,
       "subId": "S408089177",
       "firstSeen": "2026-11-05 08:23",
-      "absenceDays": null
+      "absenceDays": 1.1
     },
     {
       "speciesCode": "stodov1",
@@ -579,7 +579,7 @@
       "locationPrivate": true,
       "subId": "S407877066",
       "firstSeen": "2026-11-04 08:20",
-      "absenceDays": null
+      "absenceDays": 0.1
     },
     {
       "speciesCode": "mewgul",
@@ -596,7 +596,7 @@
       "locationPrivate": true,
       "subId": "S407877066",
       "firstSeen": "2026-11-04 08:20",
-      "absenceDays": null
+      "absenceDays": 2.1
     },
     {
       "speciesCode": "sonthr1",
@@ -630,7 +630,7 @@
       "locationPrivate": true,
       "subId": "S407877066",
       "firstSeen": "2026-11-04 08:20",
-      "absenceDays": null
+      "absenceDays": 2.1
     },
     {
       "speciesCode": "graher1",
@@ -647,7 +647,7 @@
       "locationPrivate": true,
       "subId": "S407673510",
       "firstSeen": "2026-11-03 08:25",
-      "absenceDays": null
+      "absenceDays": 3.1
     },
     {
       "speciesCode": "redkit1",
@@ -664,7 +664,7 @@
       "locationPrivate": true,
       "subId": "S407673510",
       "firstSeen": "2026-11-03 08:25",
-      "absenceDays": null
+      "absenceDays": 3.1
     },
     {
       "speciesCode": "eursta",
@@ -681,7 +681,7 @@
       "locationPrivate": true,
       "subId": "S407673510",
       "firstSeen": "2026-11-03 08:25",
-      "absenceDays": null
+      "absenceDays": 3.1
     },
     {
       "speciesCode": "whoswa",
@@ -698,7 +698,7 @@
       "locationPrivate": false,
       "subId": "S407743246",
       "firstSeen": "2026-11-03 07:45",
-      "absenceDays": null
+      "absenceDays": 1.2
     },
     {
       "speciesCode": "grypar",
@@ -749,7 +749,7 @@
       "locationPrivate": false,
       "subId": "S407743246",
       "firstSeen": "2026-11-03 07:45",
-      "absenceDays": null
+      "absenceDays": 3.2
     },
     {
       "speciesCode": "grecor",
@@ -766,7 +766,7 @@
       "locationPrivate": false,
       "subId": "S407743246",
       "firstSeen": "2026-11-03 07:45",
-      "absenceDays": null
+      "absenceDays": 3.2
     },
     {
       "speciesCode": "eurspa1",
@@ -783,7 +783,7 @@
       "locationPrivate": false,
       "subId": "S407743246",
       "firstSeen": "2026-11-03 07:45",
-      "absenceDays": null
+      "absenceDays": 1.2
     },
     {
       "speciesCode": "wemhar1",
@@ -800,7 +800,7 @@
       "locationPrivate": false,
       "subId": "S407743246",
       "firstSeen": "2026-11-03 07:45",
-      "absenceDays": null
+      "absenceDays": 3.2
     },
     {
       "speciesCode": "combuz1",
@@ -817,7 +817,7 @@
       "locationPrivate": false,
       "subId": "S407743246",
       "firstSeen": "2026-11-03 07:45",
-      "absenceDays": null
+      "absenceDays": 3.2
     },
     {
       "speciesCode": "eurkes",
@@ -834,7 +834,7 @@
       "locationPrivate": false,
       "subId": "S407743246",
       "firstSeen": "2026-11-03 07:45",
-      "absenceDays": null
+      "absenceDays": 1.2
     },
     {
       "speciesCode": "wiltit1",
@@ -868,7 +868,7 @@
       "locationPrivate": false,
       "subId": "S407743246",
       "firstSeen": "2026-11-03 07:45",
-      "absenceDays": null
+      "absenceDays": 3.2
     },
     {
       "speciesCode": "cetwar1",
@@ -885,7 +885,7 @@
       "locationPrivate": false,
       "subId": "S407743246",
       "firstSeen": "2026-11-03 07:45",
-      "absenceDays": null
+      "absenceDays": 3.2
     },
     {
       "speciesCode": "redwin",
@@ -902,7 +902,7 @@
       "locationPrivate": false,
       "subId": "S407743246",
       "firstSeen": "2026-11-03 07:45",
-      "absenceDays": null
+      "absenceDays": 3.2
     },
     {
       "speciesCode": "stonec4",
@@ -919,7 +919,7 @@
       "locationPrivate": false,
       "subId": "S407743246",
       "firstSeen": "2026-11-03 07:45",
-      "absenceDays": null
+      "absenceDays": 3.2
     },
     {
       "speciesCode": "whiwag",
@@ -936,7 +936,7 @@
       "locationPrivate": false,
       "subId": "S407743246",
       "firstSeen": "2026-11-03 07:45",
-      "absenceDays": null
+      "absenceDays": 3.2
     },
     {
       "speciesCode": "eurlin1",
@@ -953,7 +953,7 @@
       "locationPrivate": false,
       "subId": "S407743246",
       "firstSeen": "2026-11-03 07:45",
-      "absenceDays": null
+      "absenceDays": 3.2
     },
     {
       "speciesCode": "brambl",
@@ -970,7 +970,7 @@
       "locationPrivate": true,
       "subId": "S407112086",
       "firstSeen": "2026-11-01 08:38",
-      "absenceDays": null
+      "absenceDays": 1.0
     }
   ]
 }
