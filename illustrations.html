@@ -48,6 +48,8 @@
     font:inherit; color:var(--ink); cursor:pointer; }
   .pager button[aria-pressed="true"] { background:var(--ink); color:var(--paper); border-color:var(--ink); }
   .pager button:disabled { opacity:.4; cursor:default; }
+  .sheet button { transform:none; }
+  .sheet img { transform:none; }
 </style>
 </head>
 <body>
@@ -62,78 +64,211 @@
 <section class="caption" id="caption"><div class="hint" id="hint">Loading sightings…</div></section>
 
 <script>
-// Paths are relative to this page, which sits at the project root. Serve the project
-// (GitHub Pages or a local server); browsers block fetch() for files opened straight from disk.
-const DATA_URL = 'data/sightings.json';
-const IMG_DIR  = 'images/';
+// Paths are relative to this page, which sits at the project root. Serve the project.
+const DATA_URL  = 'data/sightings.json';
+const MASKS_URL = 'data/masks.json';
+const IMG_DIR   = 'images/';
+const GRID_STRIDE = 4;     // viewport px per occupancy cell (smaller = finer, slower)
+const PAD = 3;             // grid cells of breathing room around each bird
+const ELLIPSE_WIDE = 2.1;  // landscape screens: cluster spreads sideways
+const ELLIPSE_TALL = 1.7;  // narrow screens: cluster spreads vertically
 
-// Every species with a drawing is ranked here; paging controls how many show at once.
-// Order: no previous sighting first, then the longest gap since the previous sighting
-// (absenceDays), then the latest sighting.
-const NEW_WINDOW_MS = 2 * 24 * 60 * 60 * 1000;
-function isNew(o) { return !!o.firstSeen && (Date.now() - Date.parse(String(o.firstSeen).replace(' ', 'T'))) < NEW_WINDOW_MS; }
+const NEW_WINDOW_MS = 2 * 24 * 60 * 60 * 1000;   // unused by ordering, kept for the caption
+const sheet = document.getElementById('sheet');
+const caption = document.getElementById('caption');
+const hint = document.getElementById('hint');
+
+let masksTable = {};
+const maskCache = {};
+let allItems = [];
+let items = [];
+let pageNo = 0;
+let pageSizeSel = 24;                // 12 or 24
+let active = null;
+
+// Ordering (same as the other page): no previous sighting first, then the longest gap
+// since the previous sighting, then the most recent sighting.
 function byPriority(a, b) {
-  // No previous sighting (absenceDays null) comes first, then the longest gap since the
-  // previous sighting, then the most recent sighting.
   const ga = a.absenceDays == null ? Infinity : a.absenceDays;
   const gb = b.absenceDays == null ? Infinity : b.absenceDays;
   if (ga !== gb) return gb > ga ? 1 : -1;
   return String(b.obsDt).localeCompare(String(a.obsDt));
 }
+function isNew(o) {
+  return !!o.firstSeen && (Date.now() - Date.parse(String(o.firstSeen).replace(' ', 'T'))) < NEW_WINDOW_MS;
+}
 
-const sheet = document.getElementById('sheet');
-const caption = document.getElementById('caption');
-const hint = document.getElementById('hint');
-let items = [];
-let active = null;
-
-// Stable pseudo-random number per species, so the layout doesn't reshuffle on reload
-function hash(s) { let h = 0; for (const c of s) h = (h * 31 + c.charCodeAt(0)) >>> 0; return h; }
-
-function drawingExists(code) {
-  return new Promise(resolve => {
-    const im = new Image();
-    im.onload = () => resolve(true);
-    im.onerror = () => resolve(false);
-    im.src = IMG_DIR + code + '.webp';
-  });
+// Decode a 1-bit MSB-first mask into a sparse list of filled cells (same as apt.js loadMask)
+function getMask(code) {
+  if (maskCache[code]) return maskCache[code];
+  const rec = masksTable[code];
+  if (!rec) return null;
+  const bytes = atob(rec.bits);
+  const cells = [];
+  for (let y = 0; y < rec.h; y++) {
+    for (let x = 0; x < rec.w; x++) {
+      const i = y * rec.w + x;
+      if ((bytes.charCodeAt(i >> 3) >> (7 - (i & 7))) & 1) cells.push([x, y]);
+    }
+  }
+  return (maskCache[code] = { w: rec.w, h: rec.h, cells });
 }
 
 async function load() {
   try {
-    const res = await fetch(DATA_URL, { cache: 'no-cache' });
-    if (!res.ok) throw new Error('sightings returned ' + res.status);
-    const data = await res.json();
+    const [sRes, mRes] = await Promise.all([
+      fetch(DATA_URL, { cache: 'no-cache' }),
+      fetch(MASKS_URL, { cache: 'no-cache' }),
+    ]);
+    if (!sRes.ok) throw new Error('sightings returned ' + sRes.status);
+    if (!mRes.ok) throw new Error('masks returned ' + mRes.status + ' (run scripts/build_masks.py)');
+    const data = await sRes.json();
+    masksTable = await mRes.json();
 
-    // One entry per species (the job already does this; guard anyway), in priority order
+    // One entry per species, in priority order, keeping only those with a silhouette
     const seen = new Set();
-    const unique = (data.observations || [])
-      .filter(o => o.speciesCode)
+    allItems = (data.observations || [])
+      .filter(o => o.speciesCode && masksTable[o.speciesCode])
       .slice().sort(byPriority)
       .filter(o => !seen.has(o.speciesCode) && seen.add(o.speciesCode));
-
-    // Keep every species that has a drawing; paging decides how many show at once
-    const checks = await Promise.all(unique.map(async o => (await drawingExists(o.speciesCode)) ? o : null));
-    allItems = checks.filter(Boolean);
     render();
-
     hint.textContent = allItems.length
       ? 'Tap a bird to see its name and where it was seen'
-      : 'No drawings yet for these sightings';
+      : 'No silhouettes yet for these sightings';
   } catch (e) {
-    hint.textContent = 'Could not load sightings: ' + e.message;
+    hint.textContent = 'Could not load: ' + e.message;
   }
 }
 
-// Seeded random numbers, so each species always gets the same place for the same window size
-function rng(seed) {
-  let x = seed || 1;
-  return () => { x = (x * 1664525 + 1013904223) >>> 0; return x / 4294967296; };
+// ---- Paging (12 / 24 / all) ----
+function sizeNow() { return pageSizeSel; }
+function pageCount() { return Math.max(1, Math.ceil(allItems.length / sizeNow())); }
+function render() {
+  pageNo = Math.min(pageNo, pageCount() - 1);
+  const start = pageNo * sizeNow();
+  items = allItems.slice(start, start + sizeNow());
+  active = null;
+  layout();
+  renderPager();
+}
+function renderPager() {
+  const nav = document.getElementById('pager');
+  const total = pageCount();
+  nav.innerHTML = '';
+  const add = (label, onClick, { pressed, disabled } = {}) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = label;
+    b.onclick = onClick;
+    if (pressed !== undefined) b.setAttribute('aria-pressed', String(pressed));
+    if (disabled) b.disabled = true;
+    nav.append(b);
+  };
+  add('‹ Prev', () => { pageNo--; render(); }, { disabled: pageNo === 0 });
+  for (const size of [12, 24]) {
+    add(String(size), () => { pageSizeSel = size; pageNo = 0; render(); },
+        { pressed: pageSizeSel === size });
+  }
+  add('Next ›', () => { pageNo++; render(); }, { disabled: pageNo >= total - 1 });
+  const info = document.createElement('span');
+  info.textContent = `Page ${pageNo + 1} of ${total}`;
+  nav.append(info);
 }
 
-// Hex layout: birds sit on a hexagonal grid (alternate rows offset by half a cell),
-// so they nest like tiles. Each bird is varied in size, tilt and position a little
-// so the sheet still looks hand-placed.
+// ---- Silhouette packing (after apt.js maskPack, without label boxes) ----
+function maskPack(tiles, W, H, xBias, yBias, pad) {
+  const GW = Math.ceil(W / GRID_STRIDE) + 2;
+  const GH = Math.ceil(H / GRID_STRIDE) + 2;
+  const grid = new Uint8Array(GW * GH);
+
+  function cellRange(t, tx, ty, c) {
+    const sx = t.fullW / t.mask.w, sy = t.fullH / t.mask.h;
+    let x0 = Math.floor((tx + c[0] * sx) / GRID_STRIDE);
+    let y0 = Math.floor((ty + c[1] * sy) / GRID_STRIDE);
+    let x1 = Math.floor((tx + (c[0] + 1) * sx) / GRID_STRIDE);
+    let y1 = Math.floor((ty + (c[1] + 1) * sy) / GRID_STRIDE);
+    if (x0 < 0) x0 = 0; if (y0 < 0) y0 = 0;
+    if (x1 >= GW) x1 = GW - 1; if (y1 >= GH) y1 = GH - 1;
+    return [x0, y0, x1, y1];
+  }
+  function collides(t, tx, ty) {
+    const cells = t.mask.cells;
+    for (let i = 0; i < cells.length; i++) {
+      const r = cellRange(t, tx, ty, cells[i]);
+      for (let gy = r[1]; gy <= r[3]; gy++) {
+        const off = gy * GW;
+        for (let gx = r[0]; gx <= r[2]; gx++) if (grid[off + gx]) return true;
+      }
+    }
+    return false;
+  }
+  function stamp(t, tx, ty) {
+    const cells = t.mask.cells;
+    for (let i = 0; i < cells.length; i++) {
+      const r = cellRange(t, tx, ty, cells[i]);
+      // Dilate by `pad` so neighbours keep an even gap; collides() stays unpadded
+      let gy0 = Math.max(0, r[1] - pad), gy1 = Math.min(GH - 1, r[3] + pad);
+      let gx0 = Math.max(0, r[0] - pad), gx1 = Math.min(GW - 1, r[2] + pad);
+      for (let gy = gy0; gy <= gy1; gy++) {
+        const off = gy * GW;
+        for (let gx = gx0; gx <= gx1; gx++) grid[off + gx] = 1;
+      }
+    }
+  }
+  function offGrid(t, tx, ty) {
+    return tx < 0 || ty < 0 || tx + t.fullW > W || ty + t.fullH > H;
+  }
+
+  const cx = W / 2, cy = H / 2;
+  tiles.sort((a, b) => (b.fullW * b.fullH) - (a.fullW * a.fullH));
+  const placed = [];
+  let seed = 0x9E3779B9;                       // seeded so the layout is stable across resizes
+  const rand = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+
+  for (let i = 0; i < tiles.length; i++) {
+    const t = tiles[i];
+    if (i === 0) {
+      t.x = cx - t.fullW / 2; t.y = cy - t.fullH / 2;
+      stamp(t, t.x, t.y); placed.push(t);
+      continue;
+    }
+    // Centre of mass of what is placed, so the cluster grows around itself
+    let comX = 0, comY = 0, comW = 0;
+    placed.forEach(p => {
+      if (p.x < -1000) return;
+      const a = p.fullW * p.fullH;
+      comX += (p.x + p.fullW / 2) * a; comY += (p.y + p.fullH / 2) * a; comW += a;
+    });
+    if (comW) { comX /= comW; comY /= comW; } else { comX = cx; comY = cy; }
+
+    let best = null, bestCost = Infinity, foundRing = -1;
+    const step = Math.max(GRID_STRIDE, Math.min(t.fullW, t.fullH) * 0.05);
+    const maxR = Math.max(W, H);
+    const phase = rand() * Math.PI * 2;
+    for (let r = 0; r <= maxR; r += step) {
+      if (foundRing >= 0 && r > foundRing + step * 2) break;
+      const samples = Math.max(36, Math.floor(r / 1.6));
+      for (let k = 0; k < samples; k++) {
+        const theta = phase + (k / samples) * Math.PI * 2;
+        const px = cx + r * xBias * Math.cos(theta) - t.fullW / 2;
+        const py = cy + r * yBias * Math.sin(theta) - t.fullH / 2;
+        if (offGrid(t, px, py)) continue;
+        if (collides(t, px, py)) continue;
+        const dxx = px + t.fullW / 2 - comX, dyy = py + t.fullH / 2 - comY;
+        const cost = Math.hypot(dxx / xBias, dyy / yBias) + rand() * step * 0.5;
+        if (cost < bestCost) { bestCost = cost; best = { x: px, y: py }; }
+      }
+      if (best && foundRing < 0) foundRing = r;
+    }
+    if (best) {
+      t.x = best.x; t.y = best.y; stamp(t, best.x, best.y); placed.push(t);
+    } else {
+      t.x = -99999; t.y = -99999; placed.push(t);          // no room: left off the sheet
+    }
+  }
+  return placed;
+}
+
 function layout() {
   sheet.innerHTML = '';
   const n = items.length;
@@ -141,49 +276,63 @@ function layout() {
   const W = sheet.clientWidth, H = sheet.clientHeight;
   if (!W || !H) return;
 
-  const ROW = Math.sqrt(3) / 2;                    // vertical spacing of a hex grid, in cell widths
-  // Pick the row count that makes the grid cell (d) largest for this window
-  let best = { d: 0, rows: 1, cols: n };
-  for (let rows = 1; rows <= n; rows++) {
-    const cols = Math.ceil(n / rows);
-    const d = Math.min(W / (cols + 0.5), H / ((rows - 1) * ROW + 1));
-    if (d > best.d) best = { d, rows, cols };
+  const narrow = W <= 700;
+  const frac = n <= 4 ? 0.46 : n <= 12 ? 0.40 : n <= 24 ? 0.34 : 0.28;   // share of the sheet to fill
+  const minFrac = n <= 8 ? 0.01 : n <= 20 ? 0.0075 : 0.0055;
+  const vpArea = W * H, budget = vpArea * frac, minArea = vpArea * minFrac;
+
+  // Earlier in the ranking = larger; the scale runs from 3x down to 1x
+  const tiles = items.map((o, i) => ({
+    o, mask: getMask(o.speciesCode),
+    score: 1 + 2 * (n - 1 - i) / Math.max(1, n - 1),
+  }));
+  const sum = tiles.reduce((a, t) => a + t.score, 0);
+  tiles.forEach(t => {
+    t.mask = t.mask;
+    t.ar = t.mask.w / t.mask.h;
+    t.area = Math.max(minArea, budget * t.score / sum);
+    t.fullW = Math.sqrt(t.area * t.ar);
+    t.fullH = t.fullW / t.ar;
+  });
+
+  const xBias = narrow ? 1 : ELLIPSE_WIDE;
+  const yBias = narrow ? ELLIPSE_TALL : 1;
+  const pad = narrow ? Math.max(1, PAD - 1) : PAD;
+
+  // Pack, then shrink and repack until every bird is on the sheet (up to 10 rounds)
+  let placed = [];
+  for (let attempt = 0; attempt < 10; attempt++) {
+    placed = maskPack(tiles, W, H, xBias, yBias, pad);
+    const off = placed.some(t => t.x < -1000 || t.x < 0 || t.y < 0 ||
+                                 t.x + t.fullW > W || t.y + t.fullH > H);
+    if (!off) break;
+    tiles.forEach(t => { t.fullW *= 0.92; t.fullH *= 0.92; });
   }
-  const { d, rows, cols } = best;
-  const gridW = (cols + 0.5) * d, gridH = ((rows - 1) * ROW + 1) * d;
-  const x0 = (W - gridW) / 2, y0 = (H - gridH) / 2;
 
-  items.forEach((o, i) => {
-    const h = hash(o.speciesCode);
-    const rand = rng(h);
-    const row = Math.floor(i / cols);
-    const k = i % cols;
-    const rowCount = Math.min(cols, n - row * cols);
-    const shift = (row % 2) * d / 2;               // offset alternate rows
-    const centreRow = (cols - rowCount) * d / 2;   // centre a short last row
-    // Size varies around the cell; the first few (newest / longest absent) a little larger
-    const w = d * (i < 3 ? 1.02 : 0.9) * (0.9 + rand() * 0.15);
-    const cx = x0 + (k + 0.5) * d + shift + centreRow + (rand() - 0.5) * d * 0.16;
-    const cy = y0 + d / 2 + row * ROW * d + (rand() - 0.5) * d * 0.16;
-    const r = (rand() * 14) - 7;                   // tilt, degrees
-    const flip = rand() < 0.5 ? -1 : 1;
+  // Centre the cluster on the sheet
+  const visible = placed.filter(t => t.x > -1000);
+  if (visible.length) {
+    const minX = Math.min(...visible.map(t => t.x)), maxX = Math.max(...visible.map(t => t.x + t.fullW));
+    const minY = Math.min(...visible.map(t => t.y)), maxY = Math.max(...visible.map(t => t.y + t.fullH));
+    const dx = (W - (maxX - minX)) / 2 - minX, dy = (H - (maxY - minY)) / 2 - minY;
+    visible.forEach(t => { t.x += dx; t.y += dy; });
+  }
 
+  placed.forEach((t, i) => {
+    if (t.x < -1000) return;
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.setAttribute('aria-label', o.comName || o.speciesCode);
+    btn.setAttribute('aria-label', t.o.comName || t.o.speciesCode);
     btn.setAttribute('aria-pressed', 'false');
-    btn.style.left = (cx - w / 2) + 'px';
-    btn.style.top = (cy - w * 0.6) + 'px';         // drawings are about 1.2 times as tall as wide
-    btn.style.width = w + 'px';
-    btn.style.setProperty('--r', r + 'deg');
-    btn.style.setProperty('--flip', flip);
+    btn.style.left = t.x + 'px';
+    btn.style.top = t.y + 'px';
+    btn.style.width = t.fullW + 'px';
     btn.style.zIndex = i;
-
     const img = document.createElement('img');
-    img.src = IMG_DIR + o.speciesCode + '.webp';
+    img.src = IMG_DIR + t.o.speciesCode + '.webp';
     img.alt = '';
     btn.append(img);
-    btn.onclick = () => show(o, btn);
+    btn.onclick = () => show(t.o, btn);
     sheet.append(btn);
   });
 }
@@ -206,48 +355,6 @@ function show(o, btn) {
   caption.querySelector('.meta span').textContent = when + (isNew(o) ? ' · new' : '');
 }
 
-// Paging: 12, 24 or all birds per page
-let allItems = [];
-let page = 0;
-let pageSize = 24;                                  // 12, 24 or 'all'
-
-function sizeNow() { return pageSize === 'all' ? Math.max(1, allItems.length) : pageSize; }
-function pageCount() { return Math.max(1, Math.ceil(allItems.length / sizeNow())); }
-
-function render() {
-  page = Math.min(page, pageCount() - 1);
-  const start = page * sizeNow();
-  items = allItems.slice(start, start + sizeNow());
-  active = null;
-  layout();
-  renderPager();
-}
-
-function renderPager() {
-  const nav = document.getElementById('pager');
-  const total = pageCount();
-  nav.innerHTML = '';
-  const add = (label, onClick, { pressed, disabled } = {}) => {
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.textContent = label;
-    b.onclick = onClick;
-    if (pressed !== undefined) b.setAttribute('aria-pressed', String(pressed));
-    if (disabled) b.disabled = true;
-    nav.append(b);
-  };
-  add('‹ Prev', () => { page--; render(); }, { disabled: page === 0 });
-  for (const size of [12, 24, 'all']) {
-    add(size === 'all' ? 'All' : String(size), () => { pageSize = size; page = 0; render(); },
-        { pressed: pageSize === size });
-  }
-  add('Next ›', () => { page++; render(); }, { disabled: page >= total - 1 });
-  const info = document.createElement('span');
-  info.textContent = `Page ${page + 1} of ${total}`;
-  nav.append(info);
-}
-
-// Re-layout when the window changes shape (rotation, resize)
 let resizeTimer;
 new ResizeObserver(() => {
   clearTimeout(resizeTimer);
