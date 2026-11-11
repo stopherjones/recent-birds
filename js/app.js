@@ -55,6 +55,7 @@ let historyMap = null;
 
 // Paging state for the live page: 12, 24 or 'all' per page
 let pageAll = [];
+let pageCmp = null;                 // comparator used to order pageAll for display
 let pageNo = 0;
 let pageSizeSel = 24;
 let pageLabel = '';
@@ -64,7 +65,8 @@ function renderPage() {
   const size = pageSizeSel === 'all' ? Math.max(1, len) : pageSizeSel;
   const pages = Math.max(1, Math.ceil(len / size));
   pageNo = Math.min(pageNo, pages - 1);
-  const birds = pageAll.slice(pageNo * size, pageNo * size + size);
+  const ordered = pageCmp ? [...pageAll].sort(pageCmp) : pageAll;   // sort again at display time
+  const birds = ordered.slice(pageNo * size, pageNo * size + size);
   const version = ++renderVersion;
   $('birds').innerHTML = birds.length
     ? birds.map((b,i)=>`<article class="bird" data-bird-index="${i}"><div class="art" aria-hidden="true">❧</div><h2>${speciesLink(b)}</h2><div class="latin">${esc(b.sciName||'')}</div><div class="detail">${esc(b.locName||'Nearby')} · ${esc(prettyDate(b.obsDt))}</div></article>`).join('')
@@ -109,6 +111,7 @@ function render(data,coords,label,radiusKm=10){
   const sorted=[...data].sort(coords ? byDistance : byPriority);
   const unique=[...new Map(sorted.map(x=>[x.speciesCode||x.comName,x])).values()];
   pageAll = unique;
+  pageCmp = coords ? byDistance : byPriority;
   pageLabel = label;
   $('summary').textContent=`${unique.length} species recently reported within ${radiusKm} km`;
   $('count').textContent=`${unique.length} species · ${data.length} records`;
