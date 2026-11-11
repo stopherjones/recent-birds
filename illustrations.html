@@ -50,6 +50,13 @@
   .pager button:disabled { opacity:.4; cursor:default; }
   .sheet button { transform:none; }
   .sheet img { transform:none; }
+  header { position:relative; }
+  .fsbtn { position:absolute; top:12px; right:12px; background:none; border:1px solid var(--line);
+    border-radius:999px; padding:6px 12px; font:13px/1 system-ui,sans-serif; color:var(--ink); cursor:pointer; }
+  /* Fullscreen: header text, button and paging hidden; drawings take the freed space */
+  body.fs header, body.fs .fsbtn, body.fs .pager { display:none; }
+  body.fs .sheet { width:100vw; margin:0; min-height:0; }
+  body.fs .caption { margin-bottom:env(safe-area-inset-bottom, 0px); }
 </style>
 </head>
 <body>
@@ -57,6 +64,7 @@
   <div class="kicker">Local birds</div>
   <h1>Nearby sightings</h1>
   <div class="sub">Your local patch · 10 km · 7 days</div>
+  <button class="fsbtn" id="fsbtn" type="button">Fullscreen</button>
 </header>
 
 <main class="sheet" id="sheet" aria-live="polite"></main>
@@ -141,7 +149,7 @@ async function load() {
 }
 
 // ---- Paging (12 / 24 / all) ----
-function sizeNow() { return pageSizeSel; }
+function sizeNow() { return fsMode ? (window.innerWidth <= 700 ? 12 : 24) : pageSizeSel; }
 function pageCount() { return Math.max(1, Math.ceil(allItems.length / sizeNow())); }
 function render() {
   pageNo = Math.min(pageNo, pageCount() - 1);
@@ -355,10 +363,31 @@ function show(o, btn) {
   caption.querySelector('.meta span').textContent = when + (isNew(o) ? ' · new' : '');
 }
 
+// Fullscreen mode
+let fsMode = false;
+const fsBtn = document.getElementById('fsbtn');
+const canFullscreen = !!document.documentElement.requestFullscreen;
+if (!canFullscreen) fsBtn.hidden = true;            // no Fullscreen API (e.g. some iOS browsers)
+
+function setFs(on) {
+  fsMode = on;
+  document.body.classList.toggle('fs', on);
+  active = null;
+  render();
+}
+fsBtn.onclick = async () => {
+  setFs(true);
+  try { await document.documentElement.requestFullscreen(); }
+  catch (e) { setFs(false); }                       // refused: stay in the normal layout
+};
+document.addEventListener('fullscreenchange', () => {
+  if (!document.fullscreenElement && fsMode) setFs(false);   // Esc or browser exit
+});
+
 let resizeTimer;
 new ResizeObserver(() => {
   clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(layout, 120);
+  resizeTimer = setTimeout(() => (fsMode ? render() : layout()), 120);
 }).observe(sheet);
 
 load();
