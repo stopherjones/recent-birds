@@ -48,7 +48,7 @@ function kmBetween(lat1, lng1, lat2, lng2) {
 // Near me: nearest first, then the same absence ordering as the daily list
 function byDistance(a, b) {
   if (a._km !== b._km) return a._km - b._km;
-  return byPriority(a, b);
+  return String(b.obsDt).localeCompare(String(a.obsDt));   // most recent first
 }
 // Gap history from the daily job, loaded for near-me results
 let historyMap = null;
@@ -98,7 +98,7 @@ function renderPager(pages) {
   nav.append(info);
 }
 
-function render(data,coords,label){
+function render(data,coords,label,radiusKm=10){
   if (coords) {
     data.forEach(o => {
       o._km = (o.lat != null && o.lng != null) ? kmBetween(coords.lat, coords.lng, o.lat, o.lng) : Infinity;
@@ -110,7 +110,7 @@ function render(data,coords,label){
   const unique=[...new Map(sorted.map(x=>[x.speciesCode||x.comName,x])).values()];
   pageAll = unique;
   pageLabel = label;
-  $('summary').textContent=`${unique.length} species recently reported within 10 km`;
+  $('summary').textContent=`${unique.length} species recently reported within ${radiusKm} km`;
   $('count').textContent=`${unique.length} species · ${data.length} records`;
   $('updated').textContent=`Updated ${new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})} · eBird`;
   renderPage();
@@ -143,7 +143,7 @@ async function load(lat,lng){
         if(!cur || String(o.obsDt)>String(cur.obsDt)) found.set(key,o);
       }
       const all=[...found.values()];
-      render(all,{lat,lng},`YOUR LOCAL PATCH · ${km} KM · 7 DAYS`);
+      render(all,{lat,lng},`YOUR LOCAL PATCH · ${km} KM · 7 DAYS`,km);
       if(new Set([...found.values()].map(x=>x.speciesCode)).size>=SHOW) break;
     }
     status(`Found ${new Set([...found.values()].map(x=>x.speciesCode)).size} species within ${radius} km.`);
