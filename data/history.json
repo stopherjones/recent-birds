@@ -1,13 +1,13 @@
 {
   "gragoo": {
     "firstSeen": "2026-11-05 18:30",
-    "lastSeen": "2026-11-10 08:26",
-    "absenceDays": 0.9
+    "lastSeen": "2026-11-13 08:19",
+    "absenceDays": 3
   },
   "mutswa": {
     "firstSeen": "2026-11-05 18:30",
-    "lastSeen": "2026-11-11 11:00",
-    "absenceDays": 2
+    "lastSeen": "2026-11-13 08:19",
+    "absenceDays": 1.9
   },
   "mallar3": {
     "firstSeen": "2026-11-05 18:30",
@@ -21,8 +21,8 @@
   },
   "cowpig1": {
     "firstSeen": "2026-11-05 18:30",
-    "lastSeen": "2026-11-12 08:26",
-    "absenceDays": 0.9
+    "lastSeen": "2026-11-13 08:19",
+    "absenceDays": 1
   },
   "commoo3": {
     "firstSeen": "2026-11-05 18:30",
@@ -51,7 +51,7 @@
   },
   "eucdov": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-12 08:26",
+    "lastSeen": "2026-11-13 08:19",
     "absenceDays": 1
   },
   "comkin1": {
@@ -66,13 +66,13 @@
   },
   "eurmag1": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-12 08:26",
-    "absenceDays": 0.9
+    "lastSeen": "2026-11-13 08:19",
+    "absenceDays": 1
   },
   "eurjac": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-12 08:26",
-    "absenceDays": 0.9
+    "lastSeen": "2026-11-13 08:19",
+    "absenceDays": 1
   },
   "rook1": {
     "firstSeen": "2026-11-05 08:23",
@@ -81,47 +81,47 @@
   },
   "carcro1": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-12 08:26",
-    "absenceDays": 0.9
+    "lastSeen": "2026-11-13 08:19",
+    "absenceDays": 1
   },
   "blutit": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-12 08:26",
-    "absenceDays": 0.9
+    "lastSeen": "2026-11-13 08:19",
+    "absenceDays": 1
   },
   "gretit1": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-12 08:26",
-    "absenceDays": 0.9
+    "lastSeen": "2026-11-13 08:19",
+    "absenceDays": 1
   },
   "lottit1": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-12 08:26",
+    "lastSeen": "2026-11-13 08:19",
     "absenceDays": 1
   },
   "winwre4": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-12 08:26",
-    "absenceDays": 0.9
+    "lastSeen": "2026-11-13 08:19",
+    "absenceDays": 1
   },
   "eurbla": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-12 08:26",
-    "absenceDays": 0.9
+    "lastSeen": "2026-11-13 08:19",
+    "absenceDays": 1
   },
   "eurrob1": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-12 08:26",
-    "absenceDays": 0.9
+    "lastSeen": "2026-11-13 08:19",
+    "absenceDays": 1
   },
   "dunnoc1": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-12 08:26",
+    "lastSeen": "2026-11-13 08:19",
     "absenceDays": 1
   },
   "houspa": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-12 08:26",
+    "lastSeen": "2026-11-13 08:19",
     "absenceDays": 1
   },
   "meapip1": {
@@ -131,7 +131,7 @@
   },
   "comcha": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-12 08:26",
+    "lastSeen": "2026-11-13 08:19",
     "absenceDays": 1
   },
   "hawfin": {
@@ -151,8 +151,8 @@
   },
   "eurgol": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-12 08:26",
-    "absenceDays": 0.9
+    "lastSeen": "2026-11-13 08:19",
+    "absenceDays": 1
   },
   "reebun": {
     "firstSeen": "2026-11-05 08:23",
@@ -161,12 +161,12 @@
   },
   "stodov1": {
     "firstSeen": "2026-11-04 08:20",
-    "lastSeen": "2026-11-04 11:30",
-    "absenceDays": 0.1
+    "lastSeen": "2026-11-13 08:19",
+    "absenceDays": 8.9
   },
   "mewgul": {
     "firstSeen": "2026-11-04 08:20",
-    "lastSeen": "2026-11-12 08:26",
+    "lastSeen": "2026-11-13 08:19",
     "absenceDays": 1
   },
   "sonthr1": {
@@ -246,8 +246,8 @@
   },
   "skylar": {
     "firstSeen": "2026-11-03 07:45",
-    "lastSeen": "2026-11-09 10:00",
-    "absenceDays": 2.9
+    "lastSeen": "2026-11-13 08:19",
+    "absenceDays": 3.9
   },
   "cetwar1": {
     "firstSeen": "2026-11-03 07:45",
@@ -256,8 +256,8 @@
   },
   "redwin": {
     "firstSeen": "2026-11-03 07:45",
-    "lastSeen": "2026-11-11 11:00",
-    "absenceDays": 2
+    "lastSeen": "2026-11-13 08:19",
+    "absenceDays": 1.9
   },
   "stonec4": {
     "firstSeen": "2026-11-03 07:45",
@@ -266,8 +266,8 @@
   },
   "whiwag": {
     "firstSeen": "2026-11-03 07:45",
-    "lastSeen": "2026-11-12 08:26",
-    "absenceDays": 0.9
+    "lastSeen": "2026-11-13 08:19",
+    "absenceDays": 1
   },
   "eurlin1": {
     "firstSeen": "2026-11-03 07:45",
@@ -301,7 +301,7 @@
   },
   "goldcr1": {
     "firstSeen": "2026-11-06 08:33",
-    "lastSeen": "2026-11-11 07:56",
+    "lastSeen": "2026-11-13 08:19",
     "absenceDays": 2
   },
   "norsho": {
