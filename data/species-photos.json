@@ -11,6 +11,18 @@
     "author": "Sanchezn",
     "license": "CC BY-SA 3.0"
   },
+  "mallar3": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Anas_platyrhynchos_male_female_quadrat.jpg/960px-Anas_platyrhynchos_male_female_quadrat.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Anas_platyrhynchos_male_female_quadrat.jpg",
+    "author": "This picture was realized by Richard Bartz by using a Canon EF 70-300mm f/4-5.6 IS USM Lens",
+    "license": "CC BY-SA 2.5"
+  },
+  "rinphe1": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Phasianus_colchicus_Oulu_20200524_02.jpg/960px-Phasianus_colchicus_Oulu_20200524_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Phasianus_colchicus_Oulu_20200524_02.jpg",
+    "author": "Estormiz",
+    "license": "CC0"
+  },
   "stodov1": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/Pigeon_colombin_%28Colulmba_oenas%29%2C_Parc_de_Woluwe%2C_Bruxelles_%2851921513878%29.jpg/960px-Pigeon_colombin_%28Colulmba_oenas%29%2C_Parc_de_Woluwe%2C_Bruxelles_%2851921513878%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "source": "https://commons.wikimedia.org/wiki/File:Pigeon_colombin_(Colulmba_oenas),_Parc_de_Woluwe,_Bruxelles_(51921513878).jpg",
@@ -32,6 +44,18 @@
   "mewgul": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Larus_canus_Common_Gull_in_Norway.jpg/960px-Larus_canus_Common_Gull_in_Norway.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "source": "https://commons.wikimedia.org/wiki/File:Larus_canus_Common_Gull_in_Norway.jpg",
+    "author": "Andreas Trepte",
+    "license": "CC BY-SA 2.5"
+  },
+  "grswoo": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/Great_spotted_woodpecker_%28Dendrocopos_major%29_male_Drenthe.jpg/960px-Great_spotted_woodpecker_%28Dendrocopos_major%29_male_Drenthe.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Great_spotted_woodpecker_(Dendrocopos_major)_male_Drenthe.jpg",
+    "author": "Charles J. Sharp",
+    "license": "CC BY-SA 4.0"
+  },
+  "eurkes": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/Common_kestrel_falco_tinnunculus.jpg/960px-Common_kestrel_falco_tinnunculus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Common_kestrel_falco_tinnunculus.jpg",
     "author": "Andreas Trepte",
     "license": "CC BY-SA 2.5"
   },
@@ -77,17 +101,23 @@
     "author": "Ігор Червоненко",
     "license": "CC BY-SA 4.0"
   },
-  "goldcr1": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Goldcrest_1.jpg/960px-Goldcrest_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Goldcrest_1.jpg",
-    "author": "Francis C. Franklin",
-    "license": "CC BY-SA 3.0"
+  "eurnut2": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Kleiber_Sitta_europaea-0447.jpg/960px-Kleiber_Sitta_europaea-0447.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Kleiber_Sitta_europaea-0447.jpg",
+    "author": "Isiwal",
+    "license": "CC BY-SA 4.0"
   },
   "winwre4": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/Eurasian_wren_2023_12_31_02.jpg/960px-Eurasian_wren_2023_12_31_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "source": "https://commons.wikimedia.org/wiki/File:Eurasian_wren_2023_12_31_02.jpg",
     "author": "Alexis Lours",
     "license": "CC BY 4.0"
+  },
+  "eursta": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Common_starling_%28Sturnus_vulgaris%29_breeding_male_Marken.jpg/960px-Common_starling_%28Sturnus_vulgaris%29_breeding_male_Marken.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Common_starling_(Sturnus_vulgaris)_breeding_male_Marken.jpg",
+    "author": "Charles J. Sharp",
+    "license": "CC BY-SA 4.0"
   },
   "redwin": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Redwing_Turdus_iliacus.jpg/960px-Redwing_Turdus_iliacus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
@@ -119,11 +149,11 @@
     "author": "Rhododendrites",
     "license": "CC BY-SA 4.0"
   },
-  "whiwag": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/20180415_015_Winterswijk_Witte_kwikstaart_%2840785272624%29.jpg/960px-20180415_015_Winterswijk_Witte_kwikstaart_%2840785272624%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:20180415_015_Winterswijk_Witte_kwikstaart_(40785272624).jpg",
-    "author": "Jac. Janssen from BAARLO LB, NL",
-    "license": "CC BY 2.0"
+  "eutspa": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Tree_Sparrow_August_2007_Osaka_Japan.jpg/960px-Tree_Sparrow_August_2007_Osaka_Japan.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Tree_Sparrow_August_2007_Osaka_Japan.jpg",
+    "author": "Laitche",
+    "license": "Public domain"
   },
   "comcha": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/Male_Chaffinch_-_Fringilla_coelebs.jpg/960px-Male_Chaffinch_-_Fringilla_coelebs.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
@@ -137,11 +167,29 @@
     "author": "Giles Laurent",
     "license": "CC BY-SA 4.0"
   },
-  "mallar3": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Anas_platyrhynchos_male_female_quadrat.jpg/960px-Anas_platyrhynchos_male_female_quadrat.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Anas_platyrhynchos_male_female_quadrat.jpg",
-    "author": "This picture was realized by Richard Bartz by using a Canon EF 70-300mm f/4-5.6 IS USM Lens",
-    "license": "CC BY-SA 2.5"
+  "eursis": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/Eurasian_siskin_%28Spinus_spinus%29_male_Biebrzanski.jpg/960px-Eurasian_siskin_%28Spinus_spinus%29_male_Biebrzanski.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Eurasian_siskin_(Spinus_spinus)_male_Biebrzanski.jpg",
+    "author": "Charles J. Sharp",
+    "license": "CC BY-SA 4.0"
+  },
+  "reebun": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Reed_Bunting_-_Emberiza_schoeniclus_%2852015951301%29.jpg/960px-Reed_Bunting_-_Emberiza_schoeniclus_%2852015951301%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Reed_Bunting_-_Emberiza_schoeniclus_(52015951301).jpg",
+    "author": "caroline legg",
+    "license": "CC BY 2.0"
+  },
+  "goldcr1": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Goldcrest_1.jpg/960px-Goldcrest_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Goldcrest_1.jpg",
+    "author": "Francis C. Franklin",
+    "license": "CC BY-SA 3.0"
+  },
+  "whiwag": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/20180415_015_Winterswijk_Witte_kwikstaart_%2840785272624%29.jpg/960px-20180415_015_Winterswijk_Witte_kwikstaart_%2840785272624%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:20180415_015_Winterswijk_Witte_kwikstaart_(40785272624).jpg",
+    "author": "Jac. Janssen from BAARLO LB, NL",
+    "license": "CC BY 2.0"
   },
   "rook1": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Rook_%28Corvus_frugilegus%29_Heligan.jpg/960px-Rook_%28Corvus_frugilegus%29_Heligan.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
@@ -160,12 +208,6 @@
     "source": "https://commons.wikimedia.org/wiki/File:Cygnus_cygnus_Singschwan.jpg",
     "author": "Andreas Trepte",
     "license": "CC BY-SA 2.5"
-  },
-  "rinphe1": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Phasianus_colchicus_Oulu_20200524_02.jpg/960px-Phasianus_colchicus_Oulu_20200524_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Phasianus_colchicus_Oulu_20200524_02.jpg",
-    "author": "Estormiz",
-    "license": "CC0"
   },
   "norlap": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Northern-Lapwing-Vanellus-vanellus.jpg/960px-Northern-Lapwing-Vanellus-vanellus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
@@ -215,12 +257,6 @@
     "author": "Steven Ward",
     "license": "CC BY 2.0"
   },
-  "eursta": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Common_starling_%28Sturnus_vulgaris%29_breeding_male_Marken.jpg/960px-Common_starling_%28Sturnus_vulgaris%29_breeding_male_Marken.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Common_starling_(Sturnus_vulgaris)_breeding_male_Marken.jpg",
-    "author": "Charles J. Sharp",
-    "license": "CC BY-SA 4.0"
-  },
   "fieldf": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Turdus_pilaris_EM1B9020_%2834450664312%29.jpg/960px-Turdus_pilaris_EM1B9020_%2834450664312%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "source": "https://commons.wikimedia.org/wiki/File:Turdus_pilaris_EM1B9020_(34450664312).jpg",
@@ -233,23 +269,11 @@
     "author": "Charles J. Sharp",
     "license": "CC BY-SA 4.0"
   },
-  "reebun": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Reed_Bunting_-_Emberiza_schoeniclus_%2852015951301%29.jpg/960px-Reed_Bunting_-_Emberiza_schoeniclus_%2852015951301%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Reed_Bunting_-_Emberiza_schoeniclus_(52015951301).jpg",
-    "author": "caroline legg",
-    "license": "CC BY 2.0"
-  },
   "comkin1": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Alcedo_atthis_-England-8_%28cropped%29.jpg/960px-Alcedo_atthis_-England-8_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "source": "https://commons.wikimedia.org/wiki/File:Alcedo_atthis_-England-8_(cropped).jpg",
     "author": "Tony Wood",
     "license": "CC BY 2.0"
-  },
-  "eurkes": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/Common_kestrel_falco_tinnunculus.jpg/960px-Common_kestrel_falco_tinnunculus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Common_kestrel_falco_tinnunculus.jpg",
-    "author": "Andreas Trepte",
-    "license": "CC BY-SA 2.5"
   },
   "sonthr1": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/%D0%9F%D0%B5%D0%B2%D1%87%D0%B8%D0%B9_%D0%B4%D1%80%D0%BE%D0%B7%D0%B4_%D0%BD%D0%B0_%D0%BF%D0%B5%D0%BD%D1%8C%D0%BA%D0%B5_%28Turdus_philomelos%29%2C_%D0%91%D0%B8%D1%82%D1%86%D0%B5%D0%B2%D1%81%D0%BA%D0%B8%D0%B9_%D0%BB%D0%B5%D1%81.jpg/960px-%D0%9F%D0%B5%D0%B2%D1%87%D0%B8%D0%B9_%D0%B4%D1%80%D0%BE%D0%B7%D0%B4_%D0%BD%D0%B0_%D0%BF%D0%B5%D0%BD%D1%8C%D0%BA%D0%B5_%28Turdus_philomelos%29%2C_%D0%91%D0%B8%D1%82%D1%86%D0%B5%D0%B2%D1%81%D0%BA%D0%B8%D0%B9_%D0%BB%D0%B5%D1%81.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
@@ -304,17 +328,5 @@
     "source": "https://commons.wikimedia.org/wiki/File:Garrulus_glandarius_1_Luc_Viatour.jpg",
     "author": "Luc Viatour",
     "license": "CC BY-SA 3.0"
-  },
-  "cetwar1": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/37-090505-cettis-warbler-at-Kalloni-east-river.jpg/960px-37-090505-cettis-warbler-at-Kalloni-east-river.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:37-090505-cettis-warbler-at-Kalloni-east-river.jpg",
-    "author": "Mark S Jobling",
-    "license": "CC BY 3.0"
-  },
-  "eursis": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/Eurasian_siskin_%28Spinus_spinus%29_male_Biebrzanski.jpg/960px-Eurasian_siskin_%28Spinus_spinus%29_male_Biebrzanski.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Eurasian_siskin_(Spinus_spinus)_male_Biebrzanski.jpg",
-    "author": "Charles J. Sharp",
-    "license": "CC BY-SA 4.0"
   }
 }
