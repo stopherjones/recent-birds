@@ -50,6 +50,67 @@ function byDistance(a, b) {
   if (a._km !== b._km) return a._km - b._km;
   return String(b.obsDt).localeCompare(String(a.obsDt));   // most recent first
 }
+// ---- Share snapshot ----
+// The snapshot lives entirely in the URL hash (#s=...). GitHub Pages never sees the hash.
+// Stored per species: speciesCode, common name, hotspot name, date. No coordinates or radius.
+const SNAP_MAX = SHOW;
+function encodeSnapshot(items){
+  const compact=items.map(o=>[o.speciesCode||'',o.comName||'',o.locName||'',o.obsDt||'']);
+  const bytes=new TextEncoder().encode(JSON.stringify(compact));
+  let bin='';bytes.forEach(b=>bin+=String.fromCharCode(b));
+  return btoa(bin).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+}
+function decodeSnapshot(s){
+  let b=s.replace(/-/g,'+').replace(/_/g,'/');while(b.length%4)b+='=';
+  const bin=atob(b);const bytes=Uint8Array.from(bin,c=>c.charCodeAt(0));
+  const rows=JSON.parse(new TextDecoder().decode(bytes));
+  if(!Array.isArray(rows))throw new Error('Snapshot is not a list');
+  return rows.filter(Array.isArray).slice(0,SNAP_MAX).map(([speciesCode,comName,locName,obsDt])=>({speciesCode,comName,locName,obsDt}));
+}
+function readSnapshot(){
+  const m=location.hash.match(/^#s=([A-Za-z0-9_-]+)$/);
+  if(!m)return null;
+  try{return decodeSnapshot(m[1])}catch(e){console.warn('Could not read snapshot link',e);return null}
+}
+// The list as shown on screen: nearest first for near-me, capped at SNAP_MAX
+function currentShareList(){
+  const ordered=pageCmp?[...pageAll].sort(pageCmp):[...pageAll];
+  return ordered.slice(0,SNAP_MAX);
+}
+async function shareResults(){
+  const list=currentShareList();
+  if(!list.length){status('No results to share yet.',true);return}
+  const url=location.origin+location.pathname+'#s='+encodeSnapshot(list);
+  const text=`Birds near me, last 7 days (eBird): ${list.map(o=>o.comName).join(', ')}`;
+  if(navigator.share){
+    try{await navigator.share({title:'Birds near me',text,url});return}
+    catch(e){if(e.name==='AbortError')return}
+  }
+  try{
+    await navigator.clipboard.writeText(text+'\n'+url);
+    status('Copied the results and link to the clipboard.');
+  }catch{
+    status('Could not share or copy automatically in this browser.',true);
+  }
+}
+// Snapshot view, opened from a shared link: no live search, no share, no daily list
+async function showSnapshot(items){
+  $('locate').hidden=true;
+  $('share').hidden=true;
+  $('liveLink').hidden=false;
+  $('liveLink').setAttribute('href',location.pathname);
+  photoMap=await fetch('data/species-photos.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{}).catch(()=>({}));
+  pageAll=items;
+  pageCmp=null;
+  pageNo=0;
+  pageSizeSel=24;
+  $('summary').textContent=`${items.length} species in a saved snapshot of nearby sightings, last 7 days`;
+  $('count').textContent=`${items.length} species · saved snapshot`;
+  $('updated').textContent='Saved link · not live';
+  renderPage();
+  status('This is a saved snapshot and will not update.');
+}
+
 // Gap history from the daily job, loaded for near-me results
 let historyMap = null;
 
@@ -125,6 +186,7 @@ async function load(lat,lng){
   const base=workerInput.value.trim().replace(/\/$/,'');
   if(!base){status('First add your deployed Cloudflare Worker URL in the box below.',true);return}
   $('locate').disabled=true;
+  $('share').hidden=true;
   historyMap = await fetch('data/history.json',{cache:'no-cache'}).then(r=>r.ok?r.json():{}).catch(()=>({}));
   const found=new Map();          // speciesCode|locId -> latest observation at that location
   let radius=RADII[0];
@@ -150,6 +212,7 @@ async function load(lat,lng){
       if(new Set([...found.values()].map(x=>x.speciesCode)).size>=SHOW) break;
     }
     status(`Found ${new Set([...found.values()].map(x=>x.speciesCode)).size} species within ${radius} km.`);
+    if(found.size)$('share').hidden=false;
   }catch(e){status(e.message+' Check the Worker URL, secret and allowed origin.',true)}
   finally{$('locate').disabled=false}
 }
@@ -166,4 +229,7 @@ async function loadDaily(){
     status(`Updated ${new Date(sightings.generatedAt).toLocaleString('en-GB')}.`);
   }catch(e){status('Could not load the daily sightings: '+e.message,true)}
 }
-loadDaily();
+$('share').onclick=shareResults;
+const snapshot=readSnapshot();
+if(snapshot)showSnapshot(snapshot);
+else loadDaily();
