@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Share prototype</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; padding: 16px; background: #e9e5d9; color: #222; }
+  h1 { font-size: 1.3rem; margin: 0 0 12px; }
+  button { font: inherit; padding: 10px 14px; border: 1px solid #555; border-radius: 6px; background: #fff; cursor: pointer; margin: 4px 4px 4px 0; }
+  button.primary { background: #2d5a3d; color: #fff; border-color: #2d5a3d; }
+  button[hidden] { display: none; }
+  ul { padding-left: 1.2em; }
+  li small { color: #555; }
+  .banner { background: #fff8d6; border: 1px solid #c9b64a; padding: 8px 10px; border-radius: 6px; margin-bottom: 12px; font-size: 0.9rem; }
+  .log { font-family: ui-monospace, monospace; font-size: 0.8rem; background: #fff; padding: 8px; border-radius: 6px; word-break: break-all; white-space: pre-wrap; }
+  input[readonly] { width: 100%; box-sizing: border-box; padding: 8px; font-size: 0.85rem; margin-top: 6px; }
+</style>
+</head>
+<body>
+
+<h1>Share prototype</h1>
+<div id="banner" class="banner" hidden></div>
+
+<button id="locate" class="primary">Find birds near me (mock)</button>
+<button id="share" hidden>Share results</button>
+
+<h2 id="heading" style="font-size:1.05rem;margin-top:16px"></h2>
+<ul id="list"></ul>
+
+<div id="linkBox" hidden>
+  <div>Snapshot link:</div>
+  <input id="linkField" readonly onclick="this.select()">
+</div>
+
+<div class="log" id="log">Log will appear here.</div>
+
+<script>
+// ---- Mock data (same shape as the live app's observations) ----
+const MOCK = [
+  { comName: 'Robin',          sciName: 'Erithacus rubecula', locName: 'Ings Lane, York',   obsDt: '2026-11-15 08:12' },
+  { comName: 'Blackbird',      sciName: 'Turdus merula',      locName: 'Foss Court, York',  obsDt: '2026-11-15 09:40' },
+  { comName: 'Great Tit',      sciName: 'Parus major',        locName: 'Ings Lane, York',   obsDt: '2026-11-14 16:05' },
+  { comName: 'Wood Pigeon',    sciName: 'Columba palumbus',   locName: 'Rawcliffe Lakes',   obsDt: '2026-11-14 11:20' },
+  { comName: 'Goldfinch',      sciName: 'Carduelis carduelis',locName: 'Foss Court, York',  obsDt: '2026-11-13 14:55' },
+  { comName: 'Mute Swan',      sciName: 'Cygnus olor',        locName: 'Clifton Ings',      obsDt: '2026-11-12 10:30' },
+];
+
+const $ = id => document.getElementById(id);
+const log = msg => { $('log').textContent = msg + '\n' + $('log').textContent; };
+let current = null;   // the list currently shown, as [{ n, l, d }]
+
+// ---- Compact, URL-safe encoding for the hash ----
+// Stores only name, hotspot and date. No coordinates, no radius.
+function encodeList(items) {
+  const compact = items.map(o => [o.comName, o.locName || '', o.obsDt || '']);
+  const bytes = new TextEncoder().encode(JSON.stringify(compact));
+  let bin = '';
+  bytes.forEach(b => bin += String.fromCharCode(b));
+  return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+function decodeList(s) {
+  let b = s.replace(/-/g, '+').replace(/_/g, '/');
+  while (b.length % 4) b += '=';
+  const bin = atob(b);
+  const bytes = Uint8Array.from(bin, c => c.charCodeAt(0));
+  return JSON.parse(new TextDecoder().decode(bytes)).map(([comName, locName, obsDt]) => ({ comName, locName, obsDt }));
+}
+
+// Hash is never sent to GitHub Pages, so the link is just a static page with data after the #.
+function snapshotUrl(items) {
+  return location.origin + location.pathname + '#s=' + encodeList(items);
+}
+
+function shareText(items) {
+  const names = items.map(o => o.comName).join(', ');
+  return `Birds near me, last 7 days (eBird): ${names}`;
+}
+
+// ---- Rendering ----
+function renderList(items, heading) {
+  $('heading').textContent = heading;
+  $('list').innerHTML = items.map(o =>
+    `<li>${escapeHtml(o.comName)} <small>· ${escapeHtml(o.locName || '')} · ${escapeHtml(o.obsDt || '')}</small></li>`
+  ).join('');
+}
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+// ---- Near-me (mock) ----
+$('locate').onclick = () => {
+  current = MOCK.slice(0, 24);
+  $('banner').hidden = true;
+  renderList(current, `Mock results · ${current.length} species`);
+  $('share').hidden = false;          // share only appears after a search
+  $('linkBox').hidden = true;
+  log('Mock search run. Share button shown.');
+};
+
+// ---- Share ----
+$('share').onclick = async () => {
+  if (!current) return;
+  const url = snapshotUrl(current);
+  const text = shareText(current);
+  $('linkField').value = url;
+  $('linkBox').hidden = false;
+  log(`Snapshot URL length: ${url.length} characters`);
+
+  if (navigator.share) {
+    try {
+      await navigator.share({ title: 'Birds near me', text, url });
+      log('Shared via system share sheet.');
+      return;
+    } catch (e) {
+      if (e.name === 'AbortError') { log('Share cancelled.'); return; }
+      log('navigator.share failed: ' + e.name + ' ' + e.message + '. Trying clipboard.');
+    }
+  } else {
+    log('navigator.share not available. Trying clipboard.');
+  }
+
+  try {
+    await navigator.clipboard.writeText(text + '\n' + url);
+    log('Copied text and link to clipboard.');
+  } catch (e) {
+    log('Clipboard failed: ' + e.message + '. Copy the link from the box above.');
+  }
+};
+
+// ---- Snapshot view when opened from a shared link ----
+function loadFromHash() {
+  const m = location.hash.match(/^#s=([A-Za-z0-9_-]+)$/);
+  if (!m) return false;
+  try {
+    const items = decodeList(m[1]);
+    current = items;
+    renderList(items, `Shared snapshot · ${items.length} species`);
+    $('banner').textContent = 'This is a saved snapshot, not a live search. It will not update.';
+    $('banner').hidden = false;
+    $('share').hidden = true;   // no re-sharing of a snapshot in this prototype
+    log(`Decoded ${items.length} species from link.`);
+    return true;
+  } catch (e) {
+    log('Could not read the link: ' + e.message);
+    return false;
+  }
+}
+window.addEventListener('hashchange', loadFromHash);
+loadFromHash();
+
+// Round-trip self-test, so you can confirm encoding works on your phone
+(function selfTest() {
+  const ok = JSON.stringify(decodeList(encodeList(MOCK.slice(0, 3))))
+    === JSON.stringify(MOCK.slice(0, 3).map(o => ({ comName: o.comName, locName: o.locName, obsDt: o.obsDt })));
+  log('Self-test round trip: ' + (ok ? 'PASS' : 'FAIL'));
+})();
+</script>
+</body>
+</html>
