@@ -1,4 +1,124 @@
 {
+  "whoswa": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Cygnus_cygnus_Singschwan.jpg/960px-Cygnus_cygnus_Singschwan.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Cygnus_cygnus_Singschwan.jpg",
+    "author": "Andreas Trepte",
+    "license": "CC BY-SA 2.5"
+  },
+  "cowpig1": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Columba_palumbus_EM1B1397_%2827445478998%29.jpg/960px-Columba_palumbus_EM1B1397_%2827445478998%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Columba_palumbus_EM1B1397_(27445478998).jpg",
+    "author": "Bengt Nyman from Vaxholm, Sweden",
+    "license": "CC BY 2.0"
+  },
+  "eucdov": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/2022-04-06_Streptopelia_decaocto%2C_Plovdiv%2C_Bulgaria_1.jpg/960px-2022-04-06_Streptopelia_decaocto%2C_Plovdiv%2C_Bulgaria_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:2022-04-06_Streptopelia_decaocto,_Plovdiv,_Bulgaria_1.jpg",
+    "author": "stevem4560",
+    "license": "CC BY 4.0"
+  },
+  "mewgul": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Larus_canus_Common_Gull_in_Norway.jpg/960px-Larus_canus_Common_Gull_in_Norway.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Larus_canus_Common_Gull_in_Norway.jpg",
+    "author": "Andreas Trepte",
+    "license": "CC BY-SA 2.5"
+  },
+  "eurmag1": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/Eurasian_magpie_2024_03_03_02.jpg/960px-Eurasian_magpie_2024_03_03_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Eurasian_magpie_2024_03_03_02.jpg",
+    "author": "Alexis Lours",
+    "license": "CC BY 4.0"
+  },
+  "rook1": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Rook_%28Corvus_frugilegus%29_Heligan.jpg/960px-Rook_%28Corvus_frugilegus%29_Heligan.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Rook_(Corvus_frugilegus)_Heligan.jpg",
+    "author": "Charles J. Sharp",
+    "license": "CC BY-SA 4.0"
+  },
+  "carcro1": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Carrion_crow_2022_04_05_05_02.jpg/960px-Carrion_crow_2022_04_05_05_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Carrion_crow_2022_04_05_05_02.jpg",
+    "author": "Alexis Lours",
+    "license": "CC BY 4.0"
+  },
+  "blutit": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Eurasian_blue_tit_Lancashire.jpg/960px-Eurasian_blue_tit_Lancashire.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Eurasian_blue_tit_Lancashire.jpg",
+    "author": "Francis Franklin",
+    "license": "CC BY-SA 3.0"
+  },
+  "gretit1": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/Great_tit_%28Parus_major%29%2C_Parc_du_Rouge-Cloitre%2C_For%C3%AAt_de_Soignes%2C_Brussels_%2826194636951%29.jpg/960px-Great_tit_%28Parus_major%29%2C_Parc_du_Rouge-Cloitre%2C_For%C3%AAt_de_Soignes%2C_Brussels_%2826194636951%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Great_tit_(Parus_major),_Parc_du_Rouge-Cloitre,_For%C3%AAt_de_Soignes,_Brussels_(26194636951).jpg",
+    "author": "Frank Vassen from Brussels, Belgium",
+    "license": "CC BY 2.0"
+  },
+  "lottit1": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4c/%D0%94%D0%BE%D0%B2%D0%B3%D0%BE%D1%85%D0%B2%D0%BE%D1%81%D1%82%D0%B0_2.jpg/960px-%D0%94%D0%BE%D0%B2%D0%B3%D0%BE%D1%85%D0%B2%D0%BE%D1%81%D1%82%D0%B0_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:%D0%94%D0%BE%D0%B2%D0%B3%D0%BE%D1%85%D0%B2%D0%BE%D1%81%D1%82%D0%B0_2.jpg",
+    "author": "Ігор Червоненко",
+    "license": "CC BY-SA 4.0"
+  },
+  "winwre4": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/Eurasian_wren_2023_12_31_02.jpg/960px-Eurasian_wren_2023_12_31_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Eurasian_wren_2023_12_31_02.jpg",
+    "author": "Alexis Lours",
+    "license": "CC BY 4.0"
+  },
+  "eurbla": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Common_Blackbird.jpg/960px-Common_Blackbird.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Common_Blackbird.jpg",
+    "author": "Andreas Trepte",
+    "license": "CC BY-SA 2.5"
+  },
+  "fieldf": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Turdus_pilaris_EM1B9020_%2834450664312%29.jpg/960px-Turdus_pilaris_EM1B9020_%2834450664312%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Turdus_pilaris_EM1B9020_(34450664312).jpg",
+    "author": "Bengt Nyman from Vaxholm, Sweden",
+    "license": "CC BY 2.0"
+  },
+  "eurrob1": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/Erithacus_rubecula_with_cocked_head.jpg/960px-Erithacus_rubecula_with_cocked_head.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Erithacus_rubecula_with_cocked_head.jpg",
+    "author": "Francis C. Franklin",
+    "license": "CC BY-SA 3.0"
+  },
+  "dunnoc1": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/Dunnock_%28Prunella_modularis%29_3.jpg/960px-Dunnock_%28Prunella_modularis%29_3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Dunnock_(Prunella_modularis)_3.jpg",
+    "author": "Charles J. Sharp",
+    "license": "CC BY-SA 4.0"
+  },
+  "houspa": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/House_sparrow_male_in_Prospect_Park_%2853532%29.jpg/960px-House_sparrow_male_in_Prospect_Park_%2853532%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:House_sparrow_male_in_Prospect_Park_(53532).jpg",
+    "author": "Rhododendrites",
+    "license": "CC BY-SA 4.0"
+  },
+  "grywag": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Gebirgsstelze_im_Geo-Naturpark_Bergstra%C3%9Fe-Odenwald.jpg/960px-Gebirgsstelze_im_Geo-Naturpark_Bergstra%C3%9Fe-Odenwald.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Gebirgsstelze_im_Geo-Naturpark_Bergstra%C3%9Fe-Odenwald.jpg",
+    "author": "Herwig Winter",
+    "license": "CC BY-SA 4.0"
+  },
+  "comcha": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/Male_Chaffinch_-_Fringilla_coelebs.jpg/960px-Male_Chaffinch_-_Fringilla_coelebs.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Male_Chaffinch_-_Fringilla_coelebs.jpg",
+    "author": "caroline legg",
+    "license": "CC BY 2.0"
+  },
+  "hawfin": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/48/Hawfinch_%28Coccothraustes_coccothraustes%29_male_Drenthe.jpg/960px-Hawfinch_%28Coccothraustes_coccothraustes%29_male_Drenthe.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:Hawfinch_(Coccothraustes_coccothraustes)_male_Drenthe.jpg",
+    "author": "Charles J. Sharp",
+    "license": "CC BY-SA 4.0"
+  },
+  "eurgol": {
+    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/072_Wild_European_goldfinch_at_the_Parc_Jura_vaudois_Photo_by_Giles_Laurent.jpg/960px-072_Wild_European_goldfinch_at_the_Parc_Jura_vaudois_Photo_by_Giles_Laurent.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "source": "https://commons.wikimedia.org/wiki/File:072_Wild_European_goldfinch_at_the_Parc_Jura_vaudois_Photo_by_Giles_Laurent.jpg",
+    "author": "Giles Laurent",
+    "license": "CC BY-SA 4.0"
+  },
   "gragoo": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Greylag_Goose_-_St_James%27s_Park%2C_London_-_Nov_2006.jpg/960px-Greylag_Goose_-_St_James%27s_Park%2C_London_-_Nov_2006.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "source": "https://commons.wikimedia.org/wiki/File:Greylag_Goose_-_St_James%27s_Park,_London_-_Nov_2006.jpg",
@@ -71,18 +191,6 @@
     "author": "Frank Vassen from Brussels, Belgium",
     "license": "CC BY 2.0"
   },
-  "cowpig1": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Columba_palumbus_EM1B1397_%2827445478998%29.jpg/960px-Columba_palumbus_EM1B1397_%2827445478998%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Columba_palumbus_EM1B1397_(27445478998).jpg",
-    "author": "Bengt Nyman from Vaxholm, Sweden",
-    "license": "CC BY 2.0"
-  },
-  "eucdov": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fa/2022-04-06_Streptopelia_decaocto%2C_Plovdiv%2C_Bulgaria_1.jpg/960px-2022-04-06_Streptopelia_decaocto%2C_Plovdiv%2C_Bulgaria_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:2022-04-06_Streptopelia_decaocto,_Plovdiv,_Bulgaria_1.jpg",
-    "author": "stevem4560",
-    "license": "CC BY 4.0"
-  },
   "commoo3": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/Common_moorhen_%28Gallinula_chloropus%29_France.jpg/960px-Common_moorhen_%28Gallinula_chloropus%29_France.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "source": "https://commons.wikimedia.org/wiki/File:Common_moorhen_(Gallinula_chloropus)_France.jpg",
@@ -94,12 +202,6 @@
     "source": "https://commons.wikimedia.org/wiki/File:Chroicocephalus_ridibundus_(summer).jpg",
     "author": "Hans Hillewaert",
     "license": "CC BY-SA 3.0"
-  },
-  "mewgul": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Larus_canus_Common_Gull_in_Norway.jpg/960px-Larus_canus_Common_Gull_in_Norway.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Larus_canus_Common_Gull_in_Norway.jpg",
-    "author": "Andreas Trepte",
-    "license": "CC BY-SA 2.5"
   },
   "euhgul1": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/European_herring_gull_vocalizing_%2800170%29.jpg/960px-European_herring_gull_vocalizing_%2800170%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
@@ -149,41 +251,11 @@
     "author": "Luc Viatour",
     "license": "CC BY-SA 3.0"
   },
-  "eurmag1": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/Eurasian_magpie_2024_03_03_02.jpg/960px-Eurasian_magpie_2024_03_03_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Eurasian_magpie_2024_03_03_02.jpg",
-    "author": "Alexis Lours",
-    "license": "CC BY 4.0"
-  },
   "eurjac": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Nordic_jackdaw_%2852563242448%29.jpg/960px-Nordic_jackdaw_%2852563242448%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "source": "https://commons.wikimedia.org/wiki/File:Nordic_jackdaw_(52563242448).jpg",
     "author": "hedera.baltica from Wrocław, Poland",
     "license": "CC BY-SA 2.0"
-  },
-  "rook1": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Rook_%28Corvus_frugilegus%29_Heligan.jpg/960px-Rook_%28Corvus_frugilegus%29_Heligan.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Rook_(Corvus_frugilegus)_Heligan.jpg",
-    "author": "Charles J. Sharp",
-    "license": "CC BY-SA 4.0"
-  },
-  "carcro1": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Carrion_crow_2022_04_05_05_02.jpg/960px-Carrion_crow_2022_04_05_05_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Carrion_crow_2022_04_05_05_02.jpg",
-    "author": "Alexis Lours",
-    "license": "CC BY 4.0"
-  },
-  "blutit": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Eurasian_blue_tit_Lancashire.jpg/960px-Eurasian_blue_tit_Lancashire.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Eurasian_blue_tit_Lancashire.jpg",
-    "author": "Francis Franklin",
-    "license": "CC BY-SA 3.0"
-  },
-  "gretit1": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1b/Great_tit_%28Parus_major%29%2C_Parc_du_Rouge-Cloitre%2C_For%C3%AAt_de_Soignes%2C_Brussels_%2826194636951%29.jpg/960px-Great_tit_%28Parus_major%29%2C_Parc_du_Rouge-Cloitre%2C_For%C3%AAt_de_Soignes%2C_Brussels_%2826194636951%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Great_tit_(Parus_major),_Parc_du_Rouge-Cloitre,_For%C3%AAt_de_Soignes,_Brussels_(26194636951).jpg",
-    "author": "Frank Vassen from Brussels, Belgium",
-    "license": "CC BY 2.0"
   },
   "cetwar1": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/37-090505-cettis-warbler-at-Kalloni-east-river.jpg/960px-37-090505-cettis-warbler-at-Kalloni-east-river.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
@@ -191,23 +263,11 @@
     "author": "Mark S Jobling",
     "license": "CC BY 3.0"
   },
-  "lottit1": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4c/%D0%94%D0%BE%D0%B2%D0%B3%D0%BE%D1%85%D0%B2%D0%BE%D1%81%D1%82%D0%B0_2.jpg/960px-%D0%94%D0%BE%D0%B2%D0%B3%D0%BE%D1%85%D0%B2%D0%BE%D1%81%D1%82%D0%B0_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:%D0%94%D0%BE%D0%B2%D0%B3%D0%BE%D1%85%D0%B2%D0%BE%D1%81%D1%82%D0%B0_2.jpg",
-    "author": "Ігор Червоненко",
-    "license": "CC BY-SA 4.0"
-  },
   "goldcr1": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fe/Goldcrest_1.jpg/960px-Goldcrest_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "source": "https://commons.wikimedia.org/wiki/File:Goldcrest_1.jpg",
     "author": "Francis C. Franklin",
     "license": "CC BY-SA 3.0"
-  },
-  "winwre4": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/Eurasian_wren_2023_12_31_02.jpg/960px-Eurasian_wren_2023_12_31_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Eurasian_wren_2023_12_31_02.jpg",
-    "author": "Alexis Lours",
-    "license": "CC BY 4.0"
   },
   "eursta": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Common_starling_%28Sturnus_vulgaris%29_breeding_male_Marken.jpg/960px-Common_starling_%28Sturnus_vulgaris%29_breeding_male_Marken.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
@@ -227,52 +287,10 @@
     "author": "Andreas Trepte",
     "license": "CC BY-SA 2.5"
   },
-  "eurbla": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Common_Blackbird.jpg/960px-Common_Blackbird.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Common_Blackbird.jpg",
-    "author": "Andreas Trepte",
-    "license": "CC BY-SA 2.5"
-  },
-  "fieldf": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Turdus_pilaris_EM1B9020_%2834450664312%29.jpg/960px-Turdus_pilaris_EM1B9020_%2834450664312%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Turdus_pilaris_EM1B9020_(34450664312).jpg",
-    "author": "Bengt Nyman from Vaxholm, Sweden",
-    "license": "CC BY 2.0"
-  },
-  "eurrob1": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f3/Erithacus_rubecula_with_cocked_head.jpg/960px-Erithacus_rubecula_with_cocked_head.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Erithacus_rubecula_with_cocked_head.jpg",
-    "author": "Francis C. Franklin",
-    "license": "CC BY-SA 3.0"
-  },
-  "dunnoc1": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/Dunnock_%28Prunella_modularis%29_3.jpg/960px-Dunnock_%28Prunella_modularis%29_3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Dunnock_(Prunella_modularis)_3.jpg",
-    "author": "Charles J. Sharp",
-    "license": "CC BY-SA 4.0"
-  },
-  "houspa": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9b/House_sparrow_male_in_Prospect_Park_%2853532%29.jpg/960px-House_sparrow_male_in_Prospect_Park_%2853532%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:House_sparrow_male_in_Prospect_Park_(53532).jpg",
-    "author": "Rhododendrites",
-    "license": "CC BY-SA 4.0"
-  },
-  "grywag": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Gebirgsstelze_im_Geo-Naturpark_Bergstra%C3%9Fe-Odenwald.jpg/960px-Gebirgsstelze_im_Geo-Naturpark_Bergstra%C3%9Fe-Odenwald.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Gebirgsstelze_im_Geo-Naturpark_Bergstra%C3%9Fe-Odenwald.jpg",
-    "author": "Herwig Winter",
-    "license": "CC BY-SA 4.0"
-  },
   "whiwag": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/20180415_015_Winterswijk_Witte_kwikstaart_%2840785272624%29.jpg/960px-20180415_015_Winterswijk_Witte_kwikstaart_%2840785272624%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
     "source": "https://commons.wikimedia.org/wiki/File:20180415_015_Winterswijk_Witte_kwikstaart_(40785272624).jpg",
     "author": "Jac. Janssen from BAARLO LB, NL",
-    "license": "CC BY 2.0"
-  },
-  "comcha": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/Male_Chaffinch_-_Fringilla_coelebs.jpg/960px-Male_Chaffinch_-_Fringilla_coelebs.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Male_Chaffinch_-_Fringilla_coelebs.jpg",
-    "author": "caroline legg",
     "license": "CC BY 2.0"
   },
   "eurgre1": {
@@ -286,12 +304,6 @@
     "source": "https://commons.wikimedia.org/wiki/File:Carduelis_cannabina_-England_-male-8.jpg",
     "author": "Joe Pell",
     "license": "CC BY 2.0"
-  },
-  "eurgol": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/072_Wild_European_goldfinch_at_the_Parc_Jura_vaudois_Photo_by_Giles_Laurent.jpg/960px-072_Wild_European_goldfinch_at_the_Parc_Jura_vaudois_Photo_by_Giles_Laurent.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:072_Wild_European_goldfinch_at_the_Parc_Jura_vaudois_Photo_by_Giles_Laurent.jpg",
-    "author": "Giles Laurent",
-    "license": "CC BY-SA 4.0"
   },
   "reebun": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Reed_Bunting_-_Emberiza_schoeniclus_%2852015951301%29.jpg/960px-Reed_Bunting_-_Emberiza_schoeniclus_%2852015951301%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
@@ -358,12 +370,6 @@
     "source": "https://commons.wikimedia.org/wiki/File:Tree_Sparrow_August_2007_Osaka_Japan.jpg",
     "author": "Laitche",
     "license": "Public domain"
-  },
-  "whoswa": {
-    "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Cygnus_cygnus_Singschwan.jpg/960px-Cygnus_cygnus_Singschwan.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-    "source": "https://commons.wikimedia.org/wiki/File:Cygnus_cygnus_Singschwan.jpg",
-    "author": "Andreas Trepte",
-    "license": "CC BY-SA 2.5"
   },
   "norlap": {
     "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Northern-Lapwing-Vanellus-vanellus.jpg/960px-Northern-Lapwing-Vanellus-vanellus.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",

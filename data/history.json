@@ -21,8 +21,8 @@
   },
   "cowpig1": {
     "firstSeen": "2026-11-05 18:30",
-    "lastSeen": "2026-11-16 12:55",
-    "absenceDays": 1.2
+    "lastSeen": "2026-11-17 08:40",
+    "absenceDays": 0.8
   },
   "commoo3": {
     "firstSeen": "2026-11-05 18:30",
@@ -41,18 +41,18 @@
   },
   "fieldf": {
     "firstSeen": "2026-11-05 18:30",
-    "lastSeen": "2026-11-16 12:55",
-    "absenceDays": 1.2
+    "lastSeen": "2026-11-17 08:40",
+    "absenceDays": 0.8
   },
   "grywag": {
     "firstSeen": "2026-11-05 18:30",
-    "lastSeen": "2026-11-16 12:55",
-    "absenceDays": 5.2
+    "lastSeen": "2026-11-17 08:40",
+    "absenceDays": 0.8
   },
   "eucdov": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-16 12:55",
-    "absenceDays": 1.2
+    "lastSeen": "2026-11-17 08:40",
+    "absenceDays": 0.8
   },
   "comkin1": {
     "firstSeen": "2026-11-05 08:23",
@@ -66,8 +66,8 @@
   },
   "eurmag1": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-16 12:55",
-    "absenceDays": 1.2
+    "lastSeen": "2026-11-17 08:40",
+    "absenceDays": 0.8
   },
   "eurjac": {
     "firstSeen": "2026-11-05 08:23",
@@ -76,53 +76,53 @@
   },
   "rook1": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-16 12:55",
-    "absenceDays": 1.2
+    "lastSeen": "2026-11-17 08:40",
+    "absenceDays": 0.8
   },
   "carcro1": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-16 12:55",
-    "absenceDays": 1.2
+    "lastSeen": "2026-11-17 08:40",
+    "absenceDays": 0.8
   },
   "blutit": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-16 12:55",
-    "absenceDays": 1.2
+    "lastSeen": "2026-11-17 08:40",
+    "absenceDays": 0.8
   },
   "gretit1": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-16 12:55",
-    "absenceDays": 1.2
+    "lastSeen": "2026-11-17 08:40",
+    "absenceDays": 0.8
   },
   "lottit1": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-16 12:55",
-    "absenceDays": 1.2
+    "lastSeen": "2026-11-17 08:40",
+    "absenceDays": 0.8
   },
   "winwre4": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-16 12:55",
-    "absenceDays": 1.2
+    "lastSeen": "2026-11-17 08:40",
+    "absenceDays": 0.8
   },
   "eurbla": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-16 12:55",
-    "absenceDays": 2.2
+    "lastSeen": "2026-11-17 08:40",
+    "absenceDays": 0.8
   },
   "eurrob1": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-16 12:55",
-    "absenceDays": 1.2
+    "lastSeen": "2026-11-17 08:40",
+    "absenceDays": 0.8
   },
   "dunnoc1": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-16 12:55",
-    "absenceDays": 1.2
+    "lastSeen": "2026-11-17 08:40",
+    "absenceDays": 0.8
   },
   "houspa": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-16 12:55",
-    "absenceDays": 1.2
+    "lastSeen": "2026-11-17 08:40",
+    "absenceDays": 0.8
   },
   "meapip1": {
     "firstSeen": "2026-11-05 08:23",
@@ -131,13 +131,13 @@
   },
   "comcha": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-16 12:55",
-    "absenceDays": 1.2
+    "lastSeen": "2026-11-17 08:40",
+    "absenceDays": 0.8
   },
   "hawfin": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-05 08:23",
-    "absenceDays": null
+    "lastSeen": "2026-11-17 08:40",
+    "absenceDays": 12
   },
   "eurgre1": {
     "firstSeen": "2026-11-05 08:23",
@@ -151,8 +151,8 @@
   },
   "eurgol": {
     "firstSeen": "2026-11-05 08:23",
-    "lastSeen": "2026-11-16 12:55",
-    "absenceDays": 1.2
+    "lastSeen": "2026-11-17 08:40",
+    "absenceDays": 0.8
   },
   "reebun": {
     "firstSeen": "2026-11-05 08:23",
@@ -166,8 +166,8 @@
   },
   "mewgul": {
     "firstSeen": "2026-11-04 08:20",
-    "lastSeen": "2026-11-16 12:55",
-    "absenceDays": 2.2
+    "lastSeen": "2026-11-17 08:40",
+    "absenceDays": 0.8
   },
   "sonthr1": {
     "firstSeen": "2026-11-04 08:20",
@@ -196,8 +196,8 @@
   },
   "whoswa": {
     "firstSeen": "2026-11-03 07:45",
-    "lastSeen": "2026-11-11 11:00",
-    "absenceDays": 7
+    "lastSeen": "2026-11-17 08:40",
+    "absenceDays": 5.9
   },
   "grypar": {
     "firstSeen": "2026-11-03 07:45",
