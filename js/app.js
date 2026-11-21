@@ -231,7 +231,6 @@ async function loadDaily(){
 }
 // ---- iNaturalist nature (near me, same distance steps as the eBird search) ----
 const INAT_API='https://api.inaturalist.org/v1/observations';
-const INAT_REUSE=/^(cc-by|cc-by-sa|cc0)$/;      // reusable licences only, as with Commons
 function inatImage(p){
   let u=p&&(p.medium_url||p.large_url||p.url||p.square_url);
   if(typeof u!=='string')return '';
@@ -239,14 +238,17 @@ function inatImage(p){
   return u.indexOf('https://')===0?u:'';
 }
 // Turn one iNaturalist observation into the same shape as an eBird observation.
-// Returns null unless it has a reusable photo, so every card has a picture.
+// Photo: the species' representative photo (taxon.default_photo), as in Roam. Only if that is missing
+// does it fall back to the observation's own photo, and then only an openly licensed one.
+// Returns null if neither exists, so every card has a picture.
 function inatToBird(o){
   const taxon=o.taxon||{};
   if(!taxon.id||!o.id)return null;
   const [la,ln]=String(o.location||'').split(',').map(Number);
   if(!isFinite(la)||!isFinite(ln))return null;
-  const candidates=[taxon.default_photo,...(Array.isArray(o.photos)?o.photos:[])];
-  const photo=candidates.find(p=>p&&INAT_REUSE.test(String(p.license_code||'').toLowerCase())&&inatImage(p));
+  let photo=inatImage(taxon.default_photo)?taxon.default_photo:null;
+  const representative=!!photo;
+  if(!photo)photo=(Array.isArray(o.photos)?o.photos:[]).find(p=>p&&p.license_code&&inatImage(p))||null;
   if(!photo)return null;
   return {
     source:'inat',
@@ -260,12 +262,13 @@ function inatToBird(o){
     taxaUrl:'https://www.inaturalist.org/taxa/'+encodeURIComponent(taxon.id),
     photoUrl:inatImage(photo),
     photoCredit:photo.attribution||'Photo on iNaturalist',
-    photoLicense:String(photo.license_code).toUpperCase(),
+    photoKind:representative?'Representative photo':'Observation photo',
+    photoLicense:photo.license_code?String(photo.license_code).toUpperCase():'All rights reserved',
     photoLink:photo.id?'https://www.inaturalist.org/photos/'+encodeURIComponent(photo.id):'https://www.inaturalist.org/taxa/'+encodeURIComponent(taxon.id)
   };
 }
 function inatCard(b,i){
-  const photo=`<div class="photo"><img src="${esc(b.photoUrl)}" alt="${esc(b.comName)}" loading="lazy"><button type="button" class="cc-btn" aria-label="Show photo credit" aria-expanded="false" onclick="var c=this.parentNode.nextElementSibling;c.hidden=!c.hidden;this.setAttribute('aria-expanded',String(!c.hidden))">${CC_ICON}</button></div><div class="photo-credit" hidden><a href="${esc(b.photoLink)}" target="_blank" rel="noopener noreferrer">${esc(b.photoCredit)} · ${esc(b.photoLicense)}</a></div>`;
+  const photo=`<div class="photo"><img src="${esc(b.photoUrl)}" alt="${esc(b.comName)}" loading="lazy"><button type="button" class="cc-btn" aria-label="Show photo credit" aria-expanded="false" onclick="var c=this.parentNode.nextElementSibling;c.hidden=!c.hidden;this.setAttribute('aria-expanded',String(!c.hidden))">${CC_ICON}</button></div><div class="photo-credit" hidden><a href="${esc(b.photoLink)}" target="_blank" rel="noopener noreferrer">${esc(b.photoKind)}: ${esc(b.photoCredit)} · ${esc(b.photoLicense)}</a></div>`;
   return `<article class="bird" data-bird-index="${i}">${photo}<h2><a href="${esc(b.taxaUrl)}" target="_blank" rel="noopener noreferrer">${esc(b.comName)}</a></h2><div class="latin">${esc(b.sciName)}</div><div class="detail">${esc(b.locName)} · ${esc(b.obsDt)}</div><div class="detail"><a href="${esc(b.obsUrl)}" target="_blank" rel="noopener noreferrer">Recent sighting on iNaturalist</a></div></article>`;
 }
 // Widen 5 → 10 → 25 → 50 km until SHOW species are found. Keeps the nearest sighting per species.
