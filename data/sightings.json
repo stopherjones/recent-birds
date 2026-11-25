@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-24T06:53:50.974Z",
+  "generatedAt": "2026-11-25T05:22:09.205Z",
   "radiusKm": 10,
   "daysBack": 7,
   "observations": [
@@ -803,57 +803,6 @@
       "subId": "S411316487",
       "firstSeen": "2026-11-04 08:20",
       "absenceDays": 1.8
-    },
-    {
-      "speciesCode": "whoswa",
-      "comName": "Whooper Swan",
-      "sciName": "Cygnus cygnus",
-      "locId": "L24163666",
-      "locName": "Dyon Drain Bubwith",
-      "obsDt": "2026-11-17 08:40",
-      "howMany": 2,
-      "lat": 53.818473,
-      "lng": -0.923252,
-      "obsValid": true,
-      "obsReviewed": false,
-      "locationPrivate": true,
-      "subId": "S411121672",
-      "firstSeen": "2026-11-03 07:45",
-      "absenceDays": 5.9
-    },
-    {
-      "speciesCode": "mewgul",
-      "comName": "Common Gull",
-      "sciName": "Larus canus",
-      "locId": "L24163666",
-      "locName": "Dyon Drain Bubwith",
-      "obsDt": "2026-11-17 08:40",
-      "howMany": 3,
-      "lat": 53.818473,
-      "lng": -0.923252,
-      "obsValid": true,
-      "obsReviewed": false,
-      "locationPrivate": true,
-      "subId": "S411121672",
-      "firstSeen": "2026-11-04 08:20",
-      "absenceDays": 0.8
-    },
-    {
-      "speciesCode": "rook1",
-      "comName": "Rook",
-      "sciName": "Corvus frugilegus",
-      "locId": "L24163666",
-      "locName": "Dyon Drain Bubwith",
-      "obsDt": "2026-11-17 08:40",
-      "howMany": 5,
-      "lat": 53.818473,
-      "lng": -0.923252,
-      "obsValid": true,
-      "obsReviewed": false,
-      "locationPrivate": true,
-      "subId": "S411121672",
-      "firstSeen": "2026-11-05 08:23",
-      "absenceDays": 0.8
     }
   ]
 }
